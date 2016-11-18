@@ -5,5 +5,6 @@ package br.unirio.pm.tree;
  */
 public class BurkhardKellerTree {
     public BurkhardKellerTreeSearchResult search(String casa, int i, int i1) {
+        return null;
     }
 }
