@@ -8,5 +8,6 @@ public class KeyboardLayout {
     }
 
     public double getNominalDistance(char q, char q1) {
+        return 0;
     }
 }

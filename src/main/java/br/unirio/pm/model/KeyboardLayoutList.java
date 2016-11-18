@@ -5,5 +5,6 @@ package br.unirio.pm.model;
  */
 public class KeyboardLayoutList {
     public KeyboardLayout getLayoutByName(String qwerty) {
+        return null;
     }
 }

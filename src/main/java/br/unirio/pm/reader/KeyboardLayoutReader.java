@@ -7,5 +7,6 @@ import br.unirio.pm.model.KeyboardLayoutList;
  */
 public class KeyboardLayoutReader {
     public KeyboardLayoutList loadFromFile(String s) {
+        return null;
     }
 }
