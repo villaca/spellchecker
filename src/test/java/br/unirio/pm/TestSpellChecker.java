@@ -1,4 +1,4 @@
-package br.unirio.pm.spellchecker;
+package br.unirio.pm;
 
 import static org.junit.Assert.assertEquals;
 
