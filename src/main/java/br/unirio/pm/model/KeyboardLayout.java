@@ -1,5 +1,6 @@
-<<<<<<< HEAD
 package br.unirio.pm.model;
+
+import java.util.ArrayList;
 
 /**
  * Created by Daniel Villaça on 18/11/2016.
@@ -7,6 +8,7 @@ package br.unirio.pm.model;
 public class KeyboardLayout {
     
     private String name;
+    private ArrayList <KeyboardLine> line;
     
     public void prepareDistances() {
     }
@@ -22,19 +24,9 @@ public class KeyboardLayout {
     public String getName(){
         return name;
     }
-}
-=======
-package br.unirio.pm.model;
-
-/**
- * Created by Daniel Villaça on 18/11/2016.
- */
-public class KeyboardLayout {
-    public void prepareDistances() {
-    }
-
-    public double getNominalDistance(char q, char q1) {
-        return 0;
+    
+    public void addLine(KeyboardLine line){
+        this.line.add(line);
     }
 }
->>>>>>> origin/master
+

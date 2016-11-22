@@ -15,4 +15,11 @@ public class KeyboardLine {
     float offset;
     ArrayList <Character> line;
     
+    public KeyboardLine(String lineValue){
+        for(int i=0; i<lineValue.length();i++){
+            line.add(lineValue.charAt(i));
+        }
+        
+    }
+    
 }

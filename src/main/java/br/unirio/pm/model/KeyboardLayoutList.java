@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package br.unirio.pm.model;
 
 import java.util.ArrayList;
@@ -8,6 +7,10 @@ import java.util.ArrayList;
  */
 public class KeyboardLayoutList {
     ArrayList <KeyboardLayout> layoutList;
+
+    public KeyboardLayoutList() {
+        
+    }
     
     public KeyboardLayout getLayoutByName(String keyboardType) {
         for(KeyboardLayout layout : layoutList){
@@ -18,16 +21,9 @@ public class KeyboardLayoutList {
         
         return null;
     }
-}
-=======
-package br.unirio.pm.model;
 
-/**
- * Created by Daniel Villaça on 18/11/2016.
- */
-public class KeyboardLayoutList {
-    public KeyboardLayout getLayoutByName(String qwerty) {
-        return null;
+    public void add(KeyboardLayout layout) {
+        layoutList.add(layout);
     }
 }
->>>>>>> origin/master
+
