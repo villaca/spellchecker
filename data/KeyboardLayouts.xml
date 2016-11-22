@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0"?>
 <!-- https://en.wikipedia.org/wiki/Keyboard_layout -->
 <layouts>
@@ -31,4 +32,39 @@
 <line offset="0.5">ASHTGYNEOI</line>
 <line offset="0.5">ZXMCVKL</line>
 </layout>
+=======
+<?xml version="1.0"?>
+<!-- https://en.wikipedia.org/wiki/Keyboard_layout -->
+<layouts>
+<layout model="QWERTY">
+<line>QWERTYUIOP</line>
+<line offset="0.5">ASDFGHJKL</line>
+<line offset="0.5">ZXCVBNM</line>
+</layout>
+<layout model="QWERTZ">
+<line>QWERTZUIOP</line>
+<line offset="0.5">ASDFGHJKL</line>
+<line offset="0.5">YXCVBNM</line>
+</layout>
+<layout model="AZERTY">
+<line>AZERTYUIOP</line>
+<line>QSDFGHJKLM</line>
+<line>WXCVBN</line>
+</layout>
+<layout model="DVORAK">
+<line>PYFGCRL</line>
+<line offset="-3">AOEUIDHTNS</line>
+<line offset="1">QJKXBMWVZ</line>
+</layout>
+<layout model="COLEMAN">
+<line>QWFPGJLUY</line>
+<line>ARSTDHNEIO</line>
+<line>ZXCVBKM</line>
+</layout>
+<layout model="WORKMAN">
+<line>QDRWBJFUP</line>
+<line offset="0.5">ASHTGYNEOI</line>
+<line offset="0.5">ZXMCVKL</line>
+</layout>
+>>>>>>> origin/master
 </layouts>
