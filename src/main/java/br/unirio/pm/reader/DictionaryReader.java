@@ -19,7 +19,7 @@ public class DictionaryReader {
     /* Nao sei se isso ta certo, achei muito simples, vi um site com um so que mais complicado:
     http://imasters.com.br/artigo/1319/java/descompactando-arquivos-zip-com-o-java?trace=1519021197&source=single
     */
-    private void abrirArquivoDicionario(){
+    public void abrirArquivoDicionario(){
          try {
             //Le o arquivo zip
             FileInputStream fis = new FileInputStream("data/dictionary_pt-br.zip");
