@@ -8,8 +8,12 @@ import java.util.ArrayList;
 public class KeyboardLayout {
     
     private String name;
-    private ArrayList <KeyboardLine> line;
-    
+    private ArrayList <KeyboardLine> lines;
+
+    public KeyboardLayout() {
+        lines = new ArrayList<KeyboardLine>();
+    }
+
     public void prepareDistances() {
     }
 
@@ -26,7 +30,20 @@ public class KeyboardLayout {
     }
     
     public void addLine(KeyboardLine line){
-        this.line.add(line);
+        this.lines.add(line);
+    }
+
+    public ArrayList<KeyboardLine> getLines() {
+        return lines;
+    }
+
+    public double getInsertDeleteDistance() {
+
+        return 0;
+    }
+
+    public double getMaximumDistance() {
+        return 0;
     }
 }
 

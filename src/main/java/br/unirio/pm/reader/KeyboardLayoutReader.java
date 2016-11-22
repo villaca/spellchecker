@@ -16,51 +16,55 @@ import org.w3c.dom.NodeList;
  */
 public class KeyboardLayoutReader {
    
-    public KeyboardLayoutList loadFromFile(String s) {
+    public KeyboardLayoutList loadFromFile(String sourceFile) {
         KeyboardLayoutList layoutList = new KeyboardLayoutList();
         
         try {
 
-	File fXmlFile = new File(s);
-	DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(fXmlFile);
+	        File fXmlFile = new File(sourceFile);
+	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
 
-        doc.getDocumentElement().normalize();
+            doc.getDocumentElement().normalize();
 
-	System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+	        //System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-	NodeList nList = doc.getElementsByTagName("layout");
+	        NodeList nList = doc.getElementsByTagName("layout");
 
-	System.out.println("----------------------------");
-
-	for (int temp = 0; temp < nList.getLength(); temp++) {
-
-		Node nNode = nList.item(temp);
-                
-                KeyboardLayout layout = new KeyboardLayout(); 
-
-		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-
-			Element eElement = (Element) nNode;
-
-			layout.setName(eElement.getAttribute("model"));
-			layout.addLine(new KeyboardLine (eElement.getElementsByTagName("line").item(0).getTextContent()));
-                        layout.addLine(new KeyboardLine (eElement.getElementsByTagName("line").item(1).getTextContent()));
-                        layout.addLine(new KeyboardLine (eElement.getElementsByTagName("line").item(2).getTextContent()));
-			
-
-		}
-                layoutList.add(layout);
-	}
-    } 
-    catch (Exception e) 
-    {
-	e.printStackTrace();
-    }
+	        for (int temp = 0; temp < nList.getLength(); temp++) {
+		        Node nNode = nList.item(temp);
+                layoutList.add(readNode(nNode));
+	        }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         
-    return layoutList;
+        return layoutList;
+    }
 
+    private KeyboardLayout readNode(Node nNode){
+
+        KeyboardLayout layout = new KeyboardLayout();
+        Element eElement = (Element) nNode;
+
+        layout.setName(eElement.getAttribute("model"));
+        for(int i = 0; i < eElement.getElementsByTagName("line").getLength(); i++){
+            if(eElement.getElementsByTagName("line").item(i).hasAttributes()){
+                String offset = eElement.getElementsByTagName("line")
+                        .item(i).getAttributes().getNamedItem("offset").getNodeValue();
+
+                String line = eElement.getElementsByTagName("line").item(i).getTextContent();
+                layout.addLine(new KeyboardLine (line, Float.parseFloat(offset)));
+            }
+            else {
+                String line = eElement.getElementsByTagName("line").item(i).getTextContent();
+                layout.addLine(new KeyboardLine (line));
+            }
+        }
+
+        return layout;
     }
     
 }
