@@ -7,6 +7,8 @@ import br.unirio.pm.model.KeyboardLayoutList;
  */
 public class KeyboardLayoutReader {
     public KeyboardLayoutList loadFromFile(String s) {
-        return null;
+        //aqui temos que descobrir a entrada do teclado e retornar so ela
+        KeyboardLayoutList teclado = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
+        return teclado;
     }
 }
