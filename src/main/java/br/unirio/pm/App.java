@@ -26,12 +26,15 @@ public class App
         }*/
 
         KeyboardLayout layout = layouts.getLayoutByName("qwerty");
-        System.out.println(layout.getName());
+        /*System.out.println(layout.getName());
         for (KeyboardLine line : layout.getLines()){
             System.out.println("Offset: " + line.getOffset());
             line.printCharacters();
             System.out.println();
-        }
+        }*/
+
+        System.out.println(layout.getNominalDistance('w','a'));
+        System.out.println("expected: " + Math.sqrt(0.5 * 0.5 + 1 * 1));
 
     }
 }

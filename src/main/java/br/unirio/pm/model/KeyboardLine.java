@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class KeyboardLine {
     float offset;
-    ArrayList <Character> line;
+    private ArrayList <Character> line;
     
     public KeyboardLine(String lineValue){
         this.line = new ArrayList<Character>();
@@ -44,6 +44,14 @@ public class KeyboardLine {
 
     public void setOffset(float offset) {
         this.offset = offset;
+    }
+
+    public boolean hasChar(char c){
+        return line.contains(Character.toUpperCase(c));
+    }
+
+    public int charPosition(char c){
+        return line.indexOf(Character.toUpperCase(c));
     }
 
     
