@@ -33,9 +33,6 @@ public class App
             System.out.println();
         }*/
 
-        System.out.println(layout.getNominalDistance('w','a'));
-        System.out.println("expected: " + Math.sqrt(0.5 * 0.5 + 1 * 1));
-
     }
 }
 

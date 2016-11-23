@@ -47,26 +47,8 @@ public class KeyboardLayout {
             return Math.abs(position1 - position2);
         }
         else {
-            double width = 0;
-            /*if( (offset1 > offset2) && (position1 > position2) ){
-                width = Math.abs(position1 - position2) - Math.abs(offset1 - offset2);
-            }
-            else if((offset1 > offset2) && (position1 < position2)){
-                width = Math.abs(position1 - position2) + Math.abs(offset1 - offset2);
-            }
-            else if( (offset1 < offset2) && (position1 > position2) ){
-                width = Math.abs(position1 - position2) - Math.abs(offset1 - offset2);
-            }
-            else if((offset1 < offset2) && (position1 < position2)){
-                width = Math.abs(position1 - position2) + Math.abs(offset1 - offset2);
-            }
-            else {
-                width = Math.abs(position1 - position2) + Math.abs(offset1 - offset2);
-            }*/
-
-            width = Math.abs((position1 + offset1) - (position2 + offset2));
-            //double width = Math.abs(position1 - position2) - Math.abs(offset1 - offset2);
-            double height = Math.abs(height1 - height2);
+            double width = (position1 + offset1) - (position2 + offset2);
+            double height = height1 - height2;
             return Math.sqrt(width * width + height * height);
         }
     }

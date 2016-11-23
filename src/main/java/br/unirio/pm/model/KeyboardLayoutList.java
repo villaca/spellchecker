@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Created by Daniel Villaça on 18/11/2016.
  */
 public class KeyboardLayoutList extends ArrayList <KeyboardLayout>  {
-    //ArrayList <KeyboardLayout> layoutList;
 
     public KeyboardLayoutList() {
         
@@ -18,12 +17,8 @@ public class KeyboardLayoutList extends ArrayList <KeyboardLayout>  {
                 return layout;
             }
         }
-        
         return null;
     }
 
-    /*public void add(KeyboardLayout layout) {
-        this.add(layout);
-    }*/
 }
 
