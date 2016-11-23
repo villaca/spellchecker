@@ -7,14 +7,16 @@ import br.unirio.pm.reader.DictionaryReader;
 import br.unirio.pm.reader.KeyboardLayoutReader;
 
 /**
- * Hello world!
- *
+ * Main do programa
+ * 
+ * @autor Daniel Villaça 
+ * @version 18/11/2016.
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
+        KeyboardLayoutList layouts = new KeyboardLayoutReader().LoadFromFile("data/KeyboardLayouts.xml");
 
         /*for(KeyboardLayout layout : layouts){
             System.out.println(layout.getName());

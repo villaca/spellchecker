@@ -8,29 +8,38 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * Created by Daniel Villaça on 18/11/2016.
+ * Classe utilizada para ler e definir o arquivo dicionario
+ * 
+ * @autor Daniel Villaça 
+ * @version 18/11/2016.
  */
 public class DictionaryReader {
-    public BurkhardKellerTree loadFromFile(String s, IDistanceCalculator calculator) {
+    
+    /**
+     * @param sourceFile  caminho do arquivo
+     * @param calculator ?
+     */
+    public BurkhardKellerTree loadFromFile(String sourceFile, IDistanceCalculator calculator) {
        
+        OpenDictionaryZIP(sourceFile);
         return null;
     }
     
-    /* Nao sei se isso ta certo, achei muito simples, vi um site com um so que mais complicado:
-    http://imasters.com.br/artigo/1319/java/descompactando-arquivos-zip-com-o-java?trace=1519021197&source=single
-    */
-    public void abrirArquivoDicionario(){
+    /**
+     * @param sourceFile caminho do arquivo
+     */
+    public void OpenDictionaryZIP(String sourceFile){
          try {
             //Le o arquivo zip
-            FileInputStream fis = new FileInputStream("data/dictionary_pt-br.zip");
+            FileInputStream fis = new FileInputStream(sourceFile);
             //Converte para ZipInputStream
             ZipInputStream zipIn = new ZipInputStream( fis );
             
             ZipEntry entry = zipIn.getNextEntry();
             
+            //Nessa parte ja se le o arquivor, temos que armazenalo em algum lugar certo?
             while (zipIn.available() > 0)
             {
-                //aqui tecnicamente ja le o arquivo
                 System.out.print( (char) zipIn.read() );
             }
             

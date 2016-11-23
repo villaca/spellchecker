@@ -11,12 +11,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/*
- * Created by Daniel Villaça on 18/11/2016.
+/**
+ * Classe usada para ler o layout do teclado
+ * 
+ * @autor Daniel Villaça 
+ * @version 18/11/2016.
  */
 public class KeyboardLayoutReader {
    
-    public KeyboardLayoutList loadFromFile(String sourceFile) {
+    /**
+     * @param sourceFile  caminho do arquivo
+     */
+    public KeyboardLayoutList LoadFromFile(String sourceFile) {
         KeyboardLayoutList layoutList = new KeyboardLayoutList();
         
         try {
@@ -24,11 +30,9 @@ public class KeyboardLayoutReader {
 	        File fXmlFile = new File(sourceFile);
 	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+                Document doc = dBuilder.parse(fXmlFile);
 
-            doc.getDocumentElement().normalize();
-
-	        //System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+                doc.getDocumentElement().normalize();
 
 	        NodeList nList = doc.getElementsByTagName("layout");
 
@@ -44,6 +48,9 @@ public class KeyboardLayoutReader {
         return layoutList;
     }
 
+    /**
+     * @param nNode  ?
+     */
     private KeyboardLayout readNode(Node nNode){
 
         KeyboardLayout layout = new KeyboardLayout();
@@ -56,11 +63,11 @@ public class KeyboardLayoutReader {
                         .item(i).getAttributes().getNamedItem("offset").getNodeValue();
 
                 String line = eElement.getElementsByTagName("line").item(i).getTextContent();
-                layout.addLine(new KeyboardLine (line, Float.parseFloat(offset)));
+                layout.AddKeyboardLine(new KeyboardLine (line, Float.parseFloat(offset)));
             }
             else {
                 String line = eElement.getElementsByTagName("line").item(i).getTextContent();
-                layout.addLine(new KeyboardLine (line));
+                layout.AddKeyboardLine(new KeyboardLine (line));
             }
         }
 

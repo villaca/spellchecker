@@ -1,7 +1,10 @@
 package br.unirio.pm.tree;
 
 /**
- * Created by Daniel Villaça on 18/11/2016.
+ * Classe que representa a busca na BK Tree
+ * 
+ * @autor Daniel Villaça 
+ * @version 18/11/2016.
  */
 public class BurkhardKellerTreeSearchResult {
     public String getWord(int position) {

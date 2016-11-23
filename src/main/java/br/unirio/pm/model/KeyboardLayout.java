@@ -3,7 +3,10 @@ package br.unirio.pm.model;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel Villaça on 18/11/2016.
+ * Classe que representa o tipo do teclado
+ * 
+ * @autor Daniel Villaça 
+ * @version 18/11/2016.
  */
 public class KeyboardLayout {
     
@@ -14,9 +17,13 @@ public class KeyboardLayout {
         lines = new ArrayList<KeyboardLine>();
     }
 
-    public void prepareDistances() {
+    public void PrepareDistances() {
     }
 
+    /**
+     * @param q1  ? acho uma boa mudar o nome dessas variaveis
+     * @param q
+     */
     public double getNominalDistance(char q, char q1) {
 
         int height1 = 0;
@@ -25,8 +32,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height1++;
             offset1 += line.getOffset();
-            if(line.hasChar(q)){
-                position1 = line.charPosition(q);
+            if(line.HasChar(q)){
+                position1 = line.CharPosition(q);
                 break;
             }
         }
@@ -37,8 +44,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height2++;
             offset2 += line.getOffset();
-            if(line.hasChar(q1)){
-                position2 = line.charPosition(q1);
+            if(line.HasChar(q1)){
+                position2 = line.CharPosition(q1);
                 break;
             }
         }
@@ -53,6 +60,9 @@ public class KeyboardLayout {
         }
     }
     
+    /**
+     * @param name  nome do model do teclado
+     */
     public void setName(String name){
         this.name = name;
     }
@@ -61,7 +71,10 @@ public class KeyboardLayout {
         return name;
     }
     
-    public void addLine(KeyboardLine line){
+    /**
+     * @param line  linha do teclado
+     */
+    public void AddKeyboardLine(KeyboardLine line){
         this.lines.add(line);
     }
 
