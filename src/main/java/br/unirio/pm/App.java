@@ -1,5 +1,7 @@
 package br.unirio.pm;
 
+import br.unirio.pm.distance.IDistanceCalculator;
+import br.unirio.pm.distance.LevenshteinCalculator;
 import br.unirio.pm.model.KeyboardLayout;
 import br.unirio.pm.model.KeyboardLayoutList;
 import br.unirio.pm.model.KeyboardLine;
@@ -34,6 +36,8 @@ public class App
             line.printCharacters();
             System.out.println();
         }*/
+
+        new DictionaryReader().OpenDictionaryZIP("data/dictionary_pt-br.zip");
 
     }
 }

@@ -27,6 +27,7 @@ public class TestKeyboardDistances
 	@Test
 	public void testQwerty()
 	{
+
 		KeyboardLayout layout = layouts.getLayoutByName("QWERTY");
 		layout.PrepareDistances();
 		assertEquals(0.0, layout.getNominalDistance('q', 'q'), 0.001);

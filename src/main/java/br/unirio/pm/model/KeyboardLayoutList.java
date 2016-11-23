@@ -3,7 +3,7 @@ package br.unirio.pm.model;
 import java.util.ArrayList;
 
 /**
- * Classe que defini o Layot
+ * Classe que armazena os diferentes tipos de teclado
  * 
  * @autor Daniel Villaça 
  * @version 18/11/2016.

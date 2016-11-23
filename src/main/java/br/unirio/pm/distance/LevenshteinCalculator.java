@@ -9,4 +9,10 @@ import br.unirio.pm.model.KeyboardLayout;
 public class LevenshteinCalculator implements IDistanceCalculator {
     public LevenshteinCalculator(KeyboardLayout layout) {
     }
+
+    @Override
+    public int distance(Object o, Object e1) {
+        //TODO: implementar Levenshtein
+        return 0;
+    }
 }

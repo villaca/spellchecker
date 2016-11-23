@@ -8,3 +8,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 /.idea/
+data/dictionary_pt-br/__MACOSX/._dictionary pt-br.dic
+data/dictionary_pt-br/
