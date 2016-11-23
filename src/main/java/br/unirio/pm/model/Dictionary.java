@@ -5,6 +5,8 @@
  */
 package br.unirio.pm.model;
 
+import java.util.ArrayList;
+
 /**
  * Classe para construção do dicionario dentro do programa 
  * 
@@ -12,5 +14,5 @@ package br.unirio.pm.model;
  * @version 23/11/2016
  */
 public class Dictionary {
-    
+    public ArrayList <String> dictionary;
 }

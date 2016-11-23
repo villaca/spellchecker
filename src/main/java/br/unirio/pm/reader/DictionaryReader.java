@@ -4,6 +4,7 @@ import br.unirio.pm.distance.IDistanceCalculator;
 import br.unirio.pm.tree.BurkhardKellerTree;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -19,16 +20,17 @@ public class DictionaryReader {
      * @param sourceFile  caminho do arquivo
      * @param calculator ?
      */
+    
     public BurkhardKellerTree loadFromFile(String sourceFile, IDistanceCalculator calculator) {
        
-        OpenDictionaryZIP(sourceFile);
+        
         return null;
     }
     
     /**
      * @param sourceFile caminho do arquivo
      */
-    public void OpenDictionaryZIP(String sourceFile){
+    public void OpenDictionaryZIP(String sourceFile, ArrayList dictionary){
          try {
             //Le o arquivo zip
             FileInputStream fis = new FileInputStream(sourceFile);
@@ -40,7 +42,7 @@ public class DictionaryReader {
             //Nessa parte ja se le o arquivor, temos que armazenalo em algum lugar certo?
             while (zipIn.available() > 0)
             {
-                System.out.print( (char) zipIn.read() );
+               dictionary.add( (char) zipIn.read() );
             }
             
         } 
