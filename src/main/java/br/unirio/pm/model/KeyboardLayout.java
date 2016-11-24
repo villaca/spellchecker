@@ -87,8 +87,26 @@ public class KeyboardLayout {
         return 0;
     }
 
-    public double getMaximumDistance() {
-        return 0;
+    public double getMaximumDistance(){
+        double maximumDistance = 0;
+        double distanceFromOrigin = 0;
+        double offsetTemp = this.lines.get(0).getOffset();
+        char firstKey = this.lines.get(0).getChar(0);
+
+        for(KeyboardLine line : this.lines){
+            if(line.getOffset() < offsetTemp){
+                firstKey = line.getChar(0);
+            }
+        }
+
+        for(KeyboardLine line : this.lines){
+            distanceFromOrigin = getNominalDistance(firstKey, line.getChar(line.getLineLength() - 1));
+            if(distanceFromOrigin > maximumDistance){
+                maximumDistance = distanceFromOrigin;
+            }
+        }
+
+        return maximumDistance;
     }
 }
 

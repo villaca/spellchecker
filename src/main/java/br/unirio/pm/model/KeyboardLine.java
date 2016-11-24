@@ -66,5 +66,13 @@ public class KeyboardLine {
         return line.indexOf(Character.toUpperCase(c));
     }
 
+    public char getChar(int position){
+        return this.line.get(position);
+    }
+
+    public int getLineLength(){
+        return this.line.size();
+    }
+
     
 }
