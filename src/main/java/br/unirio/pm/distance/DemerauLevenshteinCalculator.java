@@ -1,6 +1,7 @@
 package br.unirio.pm.distance;
 
 import br.unirio.pm.model.KeyboardLayout;
+import info.debatty.java.stringsimilarity.*;
 import edu.gatech.gtri.bktree.Metric;
 
 /**
@@ -21,7 +22,7 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
      */
     @Override
     public int distance(Object o, Object e1) {
-        //TODO: implementar DemerauLevenshtein
-        return 0;
+        Damerau d = new Damerau();
+        return (int) d.distance(o.toString().toUpperCase(), e1.toString().toUpperCase());
     }
 }

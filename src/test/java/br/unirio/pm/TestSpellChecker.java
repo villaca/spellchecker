@@ -80,7 +80,7 @@ public class TestSpellChecker
 	{
 		KeyboardLayout layout = new KeyboardLayoutNeutro();
 		IDistanceCalculator calculator = new DemerauLevenshteinCalculator(layout);
-		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary pt-br.zip", calculator);
+		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
 		BurkhardKellerTreeSearchResult result1 = tree.search("casa", 1, 10);
 		check(result1, 0, "casa", 0.0);
@@ -119,7 +119,7 @@ public class TestSpellChecker
 	{
 		KeyboardLayout layout = layouts.getLayoutByName("QWERTY");
 		IDistanceCalculator calculator = new LevenshteinCalculator(layout);
-		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary pt-br.zip", calculator);
+		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
 		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 10);
 		check(result, 0, "casa", 0.0);
@@ -163,7 +163,7 @@ public class TestSpellChecker
 	{
 		KeyboardLayout layout = layouts.getLayoutByName("QWERTY");
 		IDistanceCalculator calculator = new DemerauLevenshteinCalculator(layout);
-		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary pt-br.zip", calculator);
+		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
 		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 10);
 		check(result, 0, "casa", 0.0);
@@ -207,7 +207,7 @@ public class TestSpellChecker
 	{
 		KeyboardLayout layout = layouts.getLayoutByName("DVORAK");
 		IDistanceCalculator calculator = new LevenshteinCalculator(layout);
-		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary pt-br.zip", calculator);
+		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
 		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 10);
 		check(result, 0, "casa", 0.0);

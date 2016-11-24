@@ -1,5 +1,6 @@
 package br.unirio.pm;
 
+import br.unirio.pm.distance.DemerauLevenshteinCalculator;
 import br.unirio.pm.distance.IDistanceCalculator;
 import br.unirio.pm.distance.LevenshteinCalculator;
 import br.unirio.pm.model.KeyboardLayout;
@@ -35,6 +36,12 @@ public class App
             line.printCharacters();
             System.out.println();
         }*/
+
+        IDistanceCalculator measurerL = new LevenshteinCalculator(layout);
+        IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
+
+        System.out.println(measurerL.distance("teste", "xablau"));
+        System.out.println(measurerD.distance("teste", "xablau"));
 
         
     }

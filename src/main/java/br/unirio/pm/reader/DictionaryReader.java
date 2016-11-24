@@ -28,6 +28,8 @@ public class DictionaryReader {
      */
     
     public BurkhardKellerTree loadFromFile(String sourceFile, IDistanceCalculator calculator) {
+
+        BurkhardKellerTree bkTree = new BurkhardKellerTree(calculator);
         try {
             //read the zip archive
             FileInputStream fis = new FileInputStream(sourceFile);
@@ -39,11 +41,10 @@ public class DictionaryReader {
             StringBuilder word = new StringBuilder();
             char letterRead;
 
-            
+
+
             while (zipIn.available() > 0)
             {
-                BurkhardKellerTree bkTree = new BurkhardKellerTree(calculator);
-
                 letterRead = (char) zipIn.read();
 
                 if(!(Character.isLetter(letterRead)) && (Character.valueOf(letterRead) != Character.valueOf(HYFEN))){
@@ -63,6 +64,6 @@ public class DictionaryReader {
         }
 
 
-        return null;
+        return bkTree;
     }
 }

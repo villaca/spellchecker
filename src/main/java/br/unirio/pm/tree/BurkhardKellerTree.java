@@ -1,7 +1,10 @@
 package br.unirio.pm.tree;
 
 import br.unirio.pm.distance.IDistanceCalculator;
+import edu.gatech.gtri.bktree.BkTreeSearcher;
 import edu.gatech.gtri.bktree.MutableBkTree;
+
+import java.util.Set;
 
 /**
  * this class represents the BK tree
@@ -30,10 +33,22 @@ public class BurkhardKellerTree {
 
         BurkhardKellerTreeSearchResult bkTree = new BurkhardKellerTreeSearchResult(this.calculator);
 
-        //TODO: implementar isso aqui efetivamente
+        BkTreeSearcher<String> searcher = new BkTreeSearcher<String>(this.bkTree);
+        Set<BkTreeSearcher.Match<? extends String>> matches = searcher.search(word, maxDistanceAllowed);
 
+        int nodesReturnedCount = 0;
+        for (BkTreeSearcher.Match<? extends String> match : matches) {
+            System.out.println("tô addando a palavra : " + match.getMatch());
+            bkTree.addWord(match.getMatch());
 
-        return null;
+            //NÃO REMOVER O TRECHO COMENTADO ABAIXO,
+            //TODO: ARRUMAR UMA MANEIRA ADEQUADA DE FAZER ISSO, PROVAVELMENTE POVOANDO TUDO E RETIRANDO O Q EXCEDER
+            /*nodesReturnedCount++;
+            if (nodesReturnedCount >= maxNodesAllowed){
+                break;
+            }*/
+        }
+        return bkTree;
     }
 
     public void addWord(String word){

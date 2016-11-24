@@ -1,6 +1,7 @@
 package br.unirio.pm.distance;
 
 import br.unirio.pm.model.KeyboardLayout;
+import info.debatty.java.stringsimilarity.*;
 
 /**
  * this class calculates de distance using Levenshtein algothim
@@ -20,7 +21,7 @@ public class LevenshteinCalculator implements IDistanceCalculator {
      */
     @Override
     public int distance(Object o, Object e1) {
-        //TODO: implementar Levenshtein
-        return 0;
+        Levenshtein l = new Levenshtein();
+        return (int) l.distance(o.toString().toUpperCase(), e1.toString().toUpperCase());
     }
 }
