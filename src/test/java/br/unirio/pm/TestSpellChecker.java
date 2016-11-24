@@ -31,7 +31,7 @@ public class TestSpellChecker
 		layouts = new KeyboardLayoutReader().loadFromFile("data/keyboardlayouts.xml");
 		
 		for (KeyboardLayout layout : layouts)
-			layout.PrepareDistances();
+			layout.prepareDistances();
 	}
 	
 	@Test

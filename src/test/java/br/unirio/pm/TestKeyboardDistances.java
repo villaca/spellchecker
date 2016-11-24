@@ -29,7 +29,7 @@ public class TestKeyboardDistances
 	{
 
 		KeyboardLayout layout = layouts.getLayoutByName("QWERTY");
-		layout.PrepareDistances();
+		layout.prepareDistances();
 		assertEquals(0.0, layout.getNominalDistance('q', 'q'), 0.001);
 		
 		assertEquals(1.0, layout.getNominalDistance('q', 'w'), 0.001);
@@ -86,10 +86,11 @@ public class TestKeyboardDistances
 	public void testDvorak()
 	{
 		KeyboardLayout layout = layouts.getLayoutByName("DVORAK");
-		layout.PrepareDistances();
+		layout.prepareDistances();
 		assertEquals(dist(3, 1), layout.getNominalDistance('p', 'a'), 0.001);
 		assertEquals(dist(9, 1), layout.getNominalDistance('z', 'a'), 0.001);
 		assertEquals(dist(9.055, 0), layout.getMaximumDistance(), 0.001);
+
 	}
 	
 	private double dist(double width, double height)

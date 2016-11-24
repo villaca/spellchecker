@@ -1,6 +1,8 @@
 package br.unirio.pm.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Classe que representa o tipo do teclado
@@ -9,22 +11,39 @@ import java.util.ArrayList;
  * @version 18/11/2016.
  */
 public class KeyboardLayout {
-    
+
+    private final static int ALPHABET_SIZE = 26;
     private String name;
     private ArrayList <KeyboardLine> lines;
+    //private double[][] distanceMatrix;
+    private HashMap<Character,HashMap<Character,Double>> distanceMatrix;
 
     public KeyboardLayout() {
-        lines = new ArrayList<KeyboardLine>();
+        this.lines = new ArrayList<KeyboardLine>();
+        this.distanceMatrix = new HashMap<Character,HashMap<Character,Double>>();
     }
 
-    public void PrepareDistances() {
+    public void prepareDistances() {
+        for(KeyboardLine line : this.lines){
+            for(int i = 0; i < line.getLineLength(); i++){
+                HashMap<Character,Double> distancesFromChar = new HashMap<Character,Double>();
+
+                for(KeyboardLine lineCompared : this.lines) {
+                    for (int j = 0; j < lineCompared.getLineLength(); j++) {
+                        distancesFromChar.put(lineCompared.getChar(j),
+                                this.calculateDistance(line.getChar(i), lineCompared.getChar(j)));
+                    }
+                }
+                this.distanceMatrix.put(line.getChar(i), distancesFromChar);
+            }
+        }
     }
 
     /**
      * @param q1  ? acho uma boa mudar o nome dessas variaveis
      * @param q
      */
-    public double getNominalDistance(char q, char q1) {
+    private double calculateDistance(char q, char q1) {
 
         int height1 = 0;
         float offset1 = 0;
@@ -58,6 +77,10 @@ public class KeyboardLayout {
             double height = height1 - height2;
             return Math.sqrt(width * width + height * height);
         }
+    }
+
+    public double getNominalDistance(char key1, char key2){
+        return this.distanceMatrix.get(Character.toUpperCase(key1)).get(Character.toUpperCase(key2));
     }
     
     /**
