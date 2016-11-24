@@ -4,10 +4,9 @@ import br.unirio.pm.distance.IDistanceCalculator;
 import edu.gatech.gtri.bktree.MutableBkTree;
 
 /**
- * Classe da BK Tree
+ * this class represents the BK tree
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @autor Daniel Villaça
  */
 public class BurkhardKellerTree {
 

@@ -28,7 +28,7 @@ public class TestSpellChecker
 	@BeforeClass
 	public static void setup()
 	{
-		layouts = new KeyboardLayoutReader().LoadFromFile("data/keyboardlayouts.xml");
+		layouts = new KeyboardLayoutReader().loadFromFile("data/keyboardlayouts.xml");
 		
 		for (KeyboardLayout layout : layouts)
 			layout.PrepareDistances();

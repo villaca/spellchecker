@@ -9,16 +9,15 @@ import br.unirio.pm.reader.DictionaryReader;
 import br.unirio.pm.reader.KeyboardLayoutReader;
 
 /**
- * Main do programa
+ * Main class
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @autor Daniel Villaça
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        KeyboardLayoutList layouts = new KeyboardLayoutReader().LoadFromFile("data/KeyboardLayouts.xml");
+        KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
 
         /*for(KeyboardLayout layout : layouts){
             System.out.println(layout.getName());
@@ -37,8 +36,7 @@ public class App
             System.out.println();
         }*/
 
-        new DictionaryReader().OpenDictionaryZIP("data/dictionary_pt-br.zip");
-
+        
     }
 }
 

@@ -10,18 +10,15 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 import java.util.ArrayList;
 
 /**
- * Classe que representas as linhas do teclado
+ * this class represents the keyboard lines
  * 
- * @author Gabriel Teixeira 
- * @version 22/11/2016
+ * @author Gabriel Teixeira
  */
 public class KeyboardLine {
     float offset;
     private ArrayList <Character> line;
     
-    /**
-     * @param lineValue  linha do teclado
-     */
+
     public KeyboardLine(String lineValue){
         this.line = new ArrayList<Character>();
         for(int i = 0; i < lineValue.length(); i++){
@@ -31,8 +28,8 @@ public class KeyboardLine {
     }
 
     /**
-     * @param lineValue  linha do teclado
-     * @param offset offset da linha do teclado definida
+     * @param lineValue  keyboard line
+     * @param offset offset keyboard line
      */
     public KeyboardLine(String lineValue, float offset){
         this.line = new ArrayList<Character>();
@@ -42,7 +39,7 @@ public class KeyboardLine {
         this.offset = offset;
     }
 
-    public void PrintCharacters(){
+    public void printCharacters(){
         for(Character c : line)
             System.out.print(c);
     }
@@ -51,9 +48,6 @@ public class KeyboardLine {
         return offset;
     }
 
-    /**
-     * @param offset offset da  linha do teclado
-     */
     public void setOffset(float offset) {
         this.offset = offset;
     }
@@ -61,14 +55,14 @@ public class KeyboardLine {
     /**
      * @param c  ? acho uma boa trocar o nome dessa variavel
      */
-    public boolean HasChar(char c){
+    public boolean hasChar(char c){
         return line.contains(Character.toUpperCase(c));
     }
 
     /**
      * @param c  ? acho uma boa trocar o nome dessa variavel
      */
-    public int CharPosition(char c){
+    public int charPosition(char c){
         return line.indexOf(Character.toUpperCase(c));
     }
 

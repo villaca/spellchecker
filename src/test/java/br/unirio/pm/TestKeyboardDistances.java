@@ -21,7 +21,7 @@ public class TestKeyboardDistances
 	@BeforeClass
 	public static void setup()
 	{
-		layouts = new KeyboardLayoutReader().LoadFromFile("data/KeyboardLayouts.xml");
+		layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
 	}
 	
 	@Test

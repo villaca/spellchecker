@@ -14,25 +14,24 @@ import java.util.Set;
 
 
 /**
- * Classe utilizada para ler e definir o arquivo dicionario
+ * this class defines the dictionary
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @autor Daniel Villaça
  */
 public class DictionaryReader {
 
     public static final char HYFEN = '-';
 
     /**
-     * @param sourceFile  caminho do arquivo
-     * @param calculator ?
+     * @param sourceFile  archive path
+     * @param calculator the value calculated to the distance between 2 keyboard keys
      */
     
     public BurkhardKellerTree loadFromFile(String sourceFile, IDistanceCalculator calculator) {
         try {
-            //Le o arquivo zip
+            //read the zip archive
             FileInputStream fis = new FileInputStream(sourceFile);
-            //Converte para ZipInputStream
+            //Convert to ZipInputStream
             ZipInputStream zipIn = new ZipInputStream( fis );
 
             ZipEntry entry = zipIn.getNextEntry();
@@ -40,7 +39,7 @@ public class DictionaryReader {
             StringBuilder word = new StringBuilder();
             char letterRead;
 
-            //Nessa parte ja se le o arquivo, temos que armazenalo em algum lugar certo?
+            
             while (zipIn.available() > 0)
             {
                 BurkhardKellerTree bkTree = new BurkhardKellerTree(calculator);
@@ -65,12 +64,5 @@ public class DictionaryReader {
 
 
         return null;
-    }
-    
-    /**
-     * @param sourceFile caminho do arquivo
-     */
-    public void OpenDictionaryZIP(String sourceFile){
-
     }
 }

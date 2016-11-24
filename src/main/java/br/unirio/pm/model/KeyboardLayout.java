@@ -32,8 +32,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height1++;
             offset1 += line.getOffset();
-            if(line.HasChar(q)){
-                position1 = line.CharPosition(q);
+            if(line.hasChar(q)){
+                position1 = line.charPosition(q);
                 break;
             }
         }
@@ -44,8 +44,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height2++;
             offset2 += line.getOffset();
-            if(line.HasChar(q1)){
-                position2 = line.CharPosition(q1);
+            if(line.hasChar(q1)){
+                position2 = line.charPosition(q1);
                 break;
             }
         }

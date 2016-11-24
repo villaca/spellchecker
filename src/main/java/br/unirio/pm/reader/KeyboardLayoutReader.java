@@ -12,17 +12,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * Classe usada para ler o layout do teclado
+ * this class read the Keyboard layout
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @autor Daniel Villaça
  */
 public class KeyboardLayoutReader {
    
     /**
-     * @param sourceFile  caminho do arquivo
+     * @param sourceFile  file path
+     * @return the list off layout characters
      */
-    public KeyboardLayoutList LoadFromFile(String sourceFile) {
+    public KeyboardLayoutList loadFromFile(String sourceFile) {
         KeyboardLayoutList layoutList = new KeyboardLayoutList();
         
         try {
@@ -50,6 +50,7 @@ public class KeyboardLayoutReader {
 
     /**
      * @param nNode  ?
+     * @return the layout of the keyboard
      */
     private KeyboardLayout readNode(Node nNode){
 

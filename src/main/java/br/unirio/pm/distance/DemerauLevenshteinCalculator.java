@@ -4,14 +4,21 @@ import br.unirio.pm.model.KeyboardLayout;
 import edu.gatech.gtri.bktree.Metric;
 
 /**
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * this class calculates de distance using Demerau Levenshtein algothim
+ * 
+ * @autor Daniel Villaça
  */
 public class DemerauLevenshteinCalculator implements IDistanceCalculator {
     public DemerauLevenshteinCalculator(KeyboardLayout layout) {
     }
 
 
+    /**
+     * 
+     * @param o ?
+     * @param e1 ?
+     * @return the Demerau Levenshtein distance
+     */
     @Override
     public int distance(Object o, Object e1) {
         //TODO: implementar DemerauLevenshtein

@@ -3,10 +3,9 @@ package br.unirio.pm.tree;
 import br.unirio.pm.distance.IDistanceCalculator;
 
 /**
- * Classe que representa a busca na BK Tree
+ * this class is used to do the search in the BK Tree
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @autor Daniel Villaça
  */
 public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
 
@@ -15,6 +14,8 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
     }
 
     //TODO: implementar geral
+    
+    
 
     public String getWord(int position) {
 
