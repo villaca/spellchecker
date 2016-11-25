@@ -18,8 +18,8 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
 
     /**
      * 
-     * @param word1 ?
-     * @param word2 ?
+     * @param word1 palavra original(?)
+     * @param word2 palavra a ser comparada(?)
      * @return the Demerau Levenshtein distance
      */
     @Immutable
@@ -59,11 +59,11 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
         }
 
         // fill in the distance matrix H
-        // look at each character in s1
+        // look at each character in word1
         for (int i = 1; i <= word1.length(); i++) {
             int db = 0;
 
-            // look at each character in b
+            // look at each character in word2
             for (int j = 1; j <= word2.length(); j++) {
                 int i1 = position.get(word2.charAt(j - 1));
                 int j1 = db;
@@ -74,13 +74,13 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
                     db = j;
                 }
 
-                /*h[i + 1][j + 1] = min(Math.min,(
+                h[i + 1][j + 1] = Math.min(
                         h[i][j] + cost, // substitution
-                        h[i + 1][j] + 1, // insertion
-                        h[i][j + 1] + 1), // deletion
-                        h[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1));
+                        Math.min(h[i + 1][j] + 1, // insertion
+                        Math.min(h[i][j + 1] + 1, // deletion
+                        h[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1))));
                 
-                */
+                
             }
 
             position.put(word1.charAt(i - 1), i);
