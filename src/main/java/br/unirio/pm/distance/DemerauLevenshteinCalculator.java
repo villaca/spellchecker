@@ -13,6 +13,7 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
  */
 public class DemerauLevenshteinCalculator implements IDistanceCalculator {
     public DemerauLevenshteinCalculator(KeyboardLayout layout) {
+        this.layout = layout;
     }
 
 
