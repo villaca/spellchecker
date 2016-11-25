@@ -1,9 +1,7 @@
 package br.unirio.pm.tree;
 
 import br.unirio.pm.distance.IDistanceCalculator;
-import edu.gatech.gtri.bktree.BkTreeSearcher;
-import edu.gatech.gtri.bktree.MutableBkTree;
-
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -13,12 +11,19 @@ import java.util.Set;
  */
 public class BurkhardKellerTree {
 
-    MutableBkTree<String> bkTree;
+    String root;
+    HashMap<Integer,BurkhardKellerTree> children;
     IDistanceCalculator calculator;
 
     public BurkhardKellerTree(IDistanceCalculator calculator) {
-        this.bkTree = new MutableBkTree<String>(calculator);
+        this.children = new HashMap<Integer, BurkhardKellerTree>();
         this.calculator = calculator;
+    }
+
+    public BurkhardKellerTree(IDistanceCalculator calculator, String root) {
+        this.children = new HashMap<Integer, BurkhardKellerTree>();
+        this.calculator = calculator;
+        this.root = root;
     }
 
 
@@ -33,13 +38,44 @@ public class BurkhardKellerTree {
 
         BurkhardKellerTreeSearchResult bkTree = new BurkhardKellerTreeSearchResult(this.calculator);
 
-        BkTreeSearcher<String> searcher = new BkTreeSearcher<String>(this.bkTree);
-        Set<BkTreeSearcher.Match<? extends String>> matches = searcher.search(word, maxDistanceAllowed);
-
         int nodesReturnedCount = 0;
+        if(root.equals(word)){
+
+            bkTree.copy(this);
+            bkTree.children.keySet() ;
+
+
+            bkTree.add(word);
+            nodesReturnedCount++;
+
+            for(int i = 0; i < maxDistanceAllowed; i++){
+                bkTree.add(this.children.get(i).getRoot());
+                nodesReturnedCount++;
+                if (nodesReturnedCount >= maxNodesAllowed){
+                    break;
+                }
+
+                Set<Integer> chaves = bkTree.getChildren().keySet();
+                for(int chave : chaves){
+                    int depth = 0;
+                    BurkhardKellerTree childTree = this.children.get(chave);
+
+
+                        bkTree.add(children.get(i).getRoot());
+                    }
+
+                    bkTree.add(children.get(i).getRoot());
+                    nodesReturnedCount++;
+                    if (nodesReturnedCount >= maxNodesAllowed){
+                        break;
+                    }
+                }
+
+            }
+        }
+
         for (BkTreeSearcher.Match<? extends String> match : matches) {
-            System.out.println("tô addando a palavra : " + match.getMatch());
-            bkTree.addWord(match.getMatch());
+            bkTree.add(match.getMatch());
 
             //NÃO REMOVER O TRECHO COMENTADO ABAIXO,
             //TODO: ARRUMAR UMA MANEIRA ADEQUADA DE FAZER ISSO, PROVAVELMENTE POVOANDO TUDO E RETIRANDO O Q EXCEDER
@@ -51,7 +87,54 @@ public class BurkhardKellerTree {
         return bkTree;
     }
 
-    public void addWord(String word){
-        this.bkTree.add(word);
+    public void add(String word){
+        if(root == null){
+            root = word;
+        }
+        else{
+            int distance = this.truncateDistance(this.calculator.calcula(this.root, word));
+
+            if(children.containsKey(distance)){
+                children.get(distance).add(word);
+            }
+            else {
+                children.put(distance, new BurkhardKellerTree(this.calculator, word));
+            }
+        }
     }
+
+    protected int truncateDistance(double distance){
+        return (int) Math.round(distance * 100);
+    }
+
+    public String getRoot() {
+        return this.root;
+    }
+
+    public IDistanceCalculator getCalculator() {
+        return calculator;
+    }
+
+    public HashMap<Integer, BurkhardKellerTree> getChildren() {
+        return children;
+    }
+
+    public void copy(BurkhardKellerTree bkTree){
+        this.root = bkTree.getRoot();
+        this.children = (HashMap<Integer, BurkhardKellerTree>) bkTree.getChildren().clone();
+        this.calculator = bkTree.getCalculator();
+    }
+
+    public void removeFurtherThan(int maximumDistance){
+
+        Set<Integer> keys = this.children.keySet();
+
+        for(int i = 0; i < keys.size(); i++){
+            this.children.get(i).removeFurtherThan(maximumDistance);
+        }
+
+
+
+    }
+
 }

@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import edu.gatech.gtri.bktree.*;
-import edu.gatech.gtri.bktree.BkTreeSearcher.Match;
-import java.util.Set;
-
-
 /**
  * this class defines the dictionary
  * 
@@ -41,14 +36,12 @@ public class DictionaryReader {
             StringBuilder word = new StringBuilder();
             char letterRead;
 
-
-
             while (zipIn.available() > 0)
             {
                 letterRead = (char) zipIn.read();
 
                 if(!(Character.isLetter(letterRead)) && (Character.valueOf(letterRead) != Character.valueOf(HYFEN))){
-                    bkTree.addWord(word.toString());
+                    bkTree.add(word.toString());
                     word.setLength(0);
                 }
                 else {
@@ -57,12 +50,9 @@ public class DictionaryReader {
             }
 
         }
-        catch (IOException e)
-        {
+        catch (IOException e){
             e.printStackTrace();
-
         }
-
 
         return bkTree;
     }

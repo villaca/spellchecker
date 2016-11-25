@@ -1,8 +1,6 @@
 package br.unirio.pm.distance;
 
 import br.unirio.pm.model.KeyboardLayout;
-import info.debatty.java.stringsimilarity.*;
-import static java.awt.SystemColor.info;
 import static java.lang.Integer.min;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +18,8 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
 
     /**
      * 
-     * @param o ?
-     * @param e1 ?
+     * @param word1 ?
+     * @param word2 ?
      * @return the Demerau Levenshtein distance
      */
     @Immutable
@@ -76,13 +74,13 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
                     db = j;
                 }
 
-                h[i + 1][j + 1] = min(Math.min,(
+                /*h[i + 1][j + 1] = min(Math.min,(
                         h[i][j] + cost, // substitution
                         h[i + 1][j] + 1, // insertion
                         h[i][j + 1] + 1), // deletion
                         h[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1));
                 
-                
+                */
             }
 
             position.put(word1.charAt(i - 1), i);
@@ -91,8 +89,9 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
         return h[word1.length() + 1][word2.length() + 1];
     }
 
-}
-Contact GitHub API Training Shop Blog About
-
+    //na real é o método acima com o nome alterado, deixei assim pq não vou encostar nisso agora
+    @Override
+    public double calcula(String word1, String word2) {
+        return 0;
     }
 }

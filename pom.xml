@@ -36,18 +36,6 @@
         </dependency>
 
         <dependency>
-            <groupId>edu.gatech.gtri.bk-tree</groupId>
-            <artifactId>bk-tree</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>info.debatty</groupId>
-            <artifactId>java-string-similarity</artifactId>
-            <version>0.19</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.10</version>
