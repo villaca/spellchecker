@@ -4,6 +4,7 @@ import br.unirio.pm.distance.IDistanceCalculator;
 import java.util.HashMap;
 import java.util.Set;
 
+
 /**
  * this class represents the BK tree
  * 
@@ -72,7 +73,8 @@ public class BurkhardKellerTree {
                 }
 
             }
-        }
+        
+        
 
         for (BkTreeSearcher.Match<? extends String> match : matches) {
             bkTree.add(match.getMatch());
@@ -88,19 +90,22 @@ public class BurkhardKellerTree {
     }
 
     public void add(String word){
+        String newWord = wordDefault(word); 
+        
         if(root == null){
-            root = word;
+            root = newWord; 
         }
         else{
-            int distance = this.truncateDistance(this.calculator.calcula(this.root, word));
+            int distance = this.truncateDistance(this.calculator.calcula(this.root, newWord));
 
             if(children.containsKey(distance)){
-                children.get(distance).add(word);
+                children.get(distance).add(newWord);
             }
             else {
-                children.put(distance, new BurkhardKellerTree(this.calculator, word));
+                children.put(distance, new BurkhardKellerTree(this.calculator, newWord));
             }
         }
+        
     }
 
     protected int truncateDistance(double distance){
@@ -134,6 +139,16 @@ public class BurkhardKellerTree {
         }
 
 
+
+    }
+    
+    public String wordDefault(String word){
+        String newWord = word.toUpperCase();
+        newWord = newWord.trim();
+        newWord = newWord.replace(".", "");
+        newWord = newWord.replace(",", "");
+        
+        return newWord;
 
     }
 
