@@ -32,7 +32,7 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         if (word2.length() == 0) 
         	return word1.length();
  
-        int[][] levensteinMatrix = new int[word1.length() + 1][word2.length() + 1];
+        double[][] levensteinMatrix = new double[word1.length() + 1][word2.length() + 1];
 
         // fills the first line and columm
         for (int i = 0; i <= word1.length(); i++)
@@ -48,19 +48,19 @@ public class LevenshteinCalculator implements IDistanceCalculator {
             for (int j = 1; j <= word2.length(); j++)
             {
             	// if the letters of lines and columms are different we add 1 in cost
-            	int cost;
+            	double cost;
             	
             	if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
             		cost = 0;
             	}
             	else {
-            		cost = 1;
+            		cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
             	}
 
             	// add to the matriz the lowest neightborhood value
-                levensteinMatrix[i][j] = 
-                		Math.min(levensteinMatrix[i - 1][j] + 1,
-                				Math.min(levensteinMatrix[i][j - 1] + 1,
+                levensteinMatrix[i][j] =
+                		Math.min(levensteinMatrix[i - 1][j] + this.layout.getInsertDeleteDistance(),
+                				Math.min(levensteinMatrix[i][j - 1] + this.layout.getInsertDeleteDistance(),
                 				levensteinMatrix[i - 1][j - 1]
 						)) + cost;
             }

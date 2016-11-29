@@ -48,7 +48,7 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
         }
 
         // Create the distance matrix H[0 .. s1.length+1][0 .. s2.length+1]
-        int[][] h = new int[word1.length() + 2][word2.length() + 2];
+        double[][] h = new double[word1.length() + 2][word2.length() + 2];
 
         // initialize the left and top edges of H
         for (int i = 0; i <= word1.length(); i++) {
@@ -72,7 +72,9 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
                 int i1 = position.get(word2.charAt(j - 1));
                 int j1 = db;
 
-                int cost = 1;
+//TODO: este demerau nao funciona bem com palavras de uma letra, precisa ajustar os indíces para poder usar a distância
+                //double cost = this.layout.getRelativeDistance(word1.charAt(i),word2.charAt(j));
+                double cost = 1;
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     cost = 0;
                     db = j;
@@ -80,10 +82,11 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
 
                 h[i + 1][j + 1] = Math.min(
                         h[i][j] + cost, // substitution
-                        Math.min(h[i + 1][j] + 1, // insertion
-                        Math.min(h[i][j + 1] + 1, // deletion
+                        Math.min(h[i + 1][j] + this.layout.getInsertDeleteDistance(), // insertion
+                        Math.min(h[i][j + 1] + this.layout.getInsertDeleteDistance(), // deletion
                         h[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1))));
-                
+
+//TODO: testar transposição com h[i1][j1] + this.layout.getNominalDistance(word1.charAt(i), word2.charAt(j1));
                 
             }
 
