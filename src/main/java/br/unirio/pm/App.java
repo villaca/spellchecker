@@ -6,7 +6,12 @@ import br.unirio.pm.distance.LevenshteinCalculator;
 import br.unirio.pm.model.KeyboardLayout;
 import br.unirio.pm.model.KeyboardLayoutList;
 import br.unirio.pm.model.KeyboardLayoutNeutro;
+import br.unirio.pm.reader.DictionaryReader;
 import br.unirio.pm.reader.KeyboardLayoutReader;
+import br.unirio.pm.tree.BurkhardKellerTree;
+import br.unirio.pm.tree.BurkhardKellerTreeSearchResult;
+
+import java.util.Scanner;
 
 /**
  * Main class
@@ -19,43 +24,85 @@ public class App
     {
         KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
 
-        /*for(KeyboardLayout layout : layouts){
-            System.out.println(layout.getName());
-            for (KeyboardLine line : layout.getLines()){
-                System.out.println("Offset: " + line.getOffset());
-                line.printCharacters();
-                System.out.println();
+        Scanner input = new Scanner(System.in);
+        String keyboardName = "";
+
+        System.out.print("Please input keyboard used (neutral for neutral): ");
+        while(input.hasNext()){
+            keyboardName = input.next();
+            input.nextLine();
+            break;
+        }
+        KeyboardLayout layout;
+        if(keyboardName.toLowerCase().equals("neutral")){
+            layout = new KeyboardLayoutNeutro();
+        }
+        else{
+            layout = layouts.getLayoutByName(keyboardName);
+            layout.prepareDistances();
+        }
+
+
+        IDistanceCalculator calculator = new LevenshteinCalculator(layout);
+        System.out.print("Please input calculation method (1 for Levenshtein, 2 for Demerau-Levenshtein): ");
+        while(input.hasNextInt()){
+            int aux = input.nextInt();
+            if(aux == 1){
+                calculator = new LevenshteinCalculator(layout);
             }
-        }*/
+            else if(aux == 2){
+                calculator = new DemerauLevenshteinCalculator(layout);
+            }
+            else{
+                System.out.println("Invalid calculation method! Terminating execution ...");
+                System.exit(0);
+            }
+            input.nextLine();
+            break;
+        }
 
-        KeyboardLayout layout = layouts.getLayoutByName("qwerty");
-        layout.prepareDistances();
-        KeyboardLayout layoutNeutro = new KeyboardLayoutNeutro();
-        /*System.out.println(layout.getName());
-        for (KeyboardLine line : layout.getLines()){
-            System.out.println("Offset: " + line.getOffset());
-            line.printCharacters();
+
+        BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
+        BurkhardKellerTreeSearchResult result;
+
+        int tolerance = 1;
+        System.out.print("Please input the tolerance degree for the search: ");
+        while(input.hasNextInt()){
+            tolerance = input.nextInt();
+            input.nextLine();
+            break;
+        }
+
+        int maxNodes = 10;
+        System.out.print("Please input how many answer at maximum you desire: ");
+        while(input.hasNextInt()){
+            maxNodes = input.nextInt();
+            input.nextLine();
+            break;
+        }
+
+        System.out.print("Please input the word you want to search (input 0 to end): ");
+        String word = "";
+
+        while(input.hasNext()){
+            word = input.next();
+            input.nextLine();
+            if(word.equals("0")){
+                break;
+            }
+
+            result = tree.search(word, tolerance, maxNodes);
+            System.out.println("Best matches: ");
+            for(String match : result.getMatches()){
+                System.out.println(match + ", far by " + calculator.calculateDistance(word.toUpperCase(), match));
+
+            }
+
             System.out.println();
-        }*/
+            System.out.print("Please input the word you want to search (input 0 to end): ");
+        }
 
-
-
-        IDistanceCalculator measurerL = new LevenshteinCalculator(layout);
-        IDistanceCalculator measurerLNeutro = new LevenshteinCalculator(layoutNeutro);
-        IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
-        IDistanceCalculator measurerDNeutro = new DemerauLevenshteinCalculator(layoutNeutro);
-
-        /*
-        System.out.println(measurerL.calculateDistance("teste", "xablau"));
-        System.out.println(measurerLNeutro.calculateDistance("teste", "xablau"));
-        System.out.println(measurerD.calculateDistance("teste", "xablau"));
-        System.out.println(measurerDNeutro.calculateDistance("teste", "xablau"));
-        */
-
-        System.out.println(layout.getRelativeDistance('s', 'd'));
-        double distance = measurerD.calculateDistance("casa", "cada");
-        System.out.println(distance);
-        System.out.println( Math.ceil(distance) );
+        return;
 
     }
 }

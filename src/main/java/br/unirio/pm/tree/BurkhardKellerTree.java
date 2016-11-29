@@ -30,8 +30,6 @@ public class BurkhardKellerTree {
 
 
     /**
-     * NAO SEI COMO EXPLICAR ESSE METODO, INDICO POR COMENTARIOS DENTRO DO METODO
-     * 
      * @param word the word to be searched in the bktree
      * @param maxDistanceAllowed the maximum distance allowed for the root node in relation to the word searched for
      * @param maxNodesAllowed the maximum number of nodes contained in the bktree returned by the search
@@ -40,8 +38,10 @@ public class BurkhardKellerTree {
      */
     public BurkhardKellerTreeSearchResult search(String word, int maxDistanceAllowed, int maxNodesAllowed) {
 
-        BurkhardKellerTreeSearchResult bkTree = new BurkhardKellerTreeSearchResult(this.calculator);
+        BurkhardKellerTreeSearchResult bkTree = new BurkhardKellerTreeSearchResult(this.calculator, word);
 
+
+        //Store all the word matching the criteria in a arraylist
         ArrayList<String> result = new ArrayList<String>();
         this.wordMatcher(this.wordDefault(word), maxDistanceAllowed, result);
 
@@ -169,5 +169,7 @@ public class BurkhardKellerTree {
         
         return newWord;
     }
+
+
 
 }

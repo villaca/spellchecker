@@ -11,17 +11,16 @@ import java.util.ArrayList;
  */
 public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
 
+    private String target;
     private ArrayList<String> matches;
 
 
-    public BurkhardKellerTreeSearchResult(IDistanceCalculator calculator) {
+    public BurkhardKellerTreeSearchResult(IDistanceCalculator calculator, String target) {
         super(calculator);
         matches = new ArrayList<String>();
+        this.target = target;
     }
 
-    public BurkhardKellerTreeSearchResult(IDistanceCalculator calculator, String root) {
-        super(calculator, root);
-    }
 
 
     public ArrayList<String> getMatches() {
@@ -33,7 +32,7 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
     }
 
     public double getDistance(int position) {
-        return this.getCalculator().calculateDistance(this.getWord(0),this.getWord(position));
+        return this.getCalculator().calculateDistance(this.target,this.getWord(position));
     }
 
     public int getPosition(String word) throws Exception {
