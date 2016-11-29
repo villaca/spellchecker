@@ -40,12 +40,14 @@ public class KeyboardLayoutReader {
 
 	        NodeList nList = doc.getElementsByTagName("layout");
 
-	        for (int temp = 0; temp < nList.getLength(); temp++) {
-		        Node nNode = nList.item(temp);
-                layoutList.add(readNode(nNode));
+	        for (int temp = 0; temp < nList.getLength(); temp++) 
+                {
+		    Node nNode = nList.item(temp);
+                    layoutList.add(readNode(nNode));
 	        }
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
         
@@ -66,15 +68,20 @@ public class KeyboardLayoutReader {
         Element eElement = (Element) nNode;
 
         layout.setModel(eElement.getAttribute("model"));
-        for(int i = 0; i < eElement.getElementsByTagName("line").getLength(); i++){
-            if(eElement.getElementsByTagName("line").item(i).hasAttributes()){
+        
+        for(int i = 0; i < eElement.getElementsByTagName("line").getLength(); i++)
+        {
+            
+            if(eElement.getElementsByTagName("line").item(i).hasAttributes())
+            {
                 String offset = eElement.getElementsByTagName("line")
                         .item(i).getAttributes().getNamedItem("offset").getNodeValue();
 
                 String line = eElement.getElementsByTagName("line").item(i).getTextContent();
                 layout.AddKeyboardLine(new KeyboardLine (line, Float.parseFloat(offset)));
             }
-            else {
+            else 
+            {
                 String line = eElement.getElementsByTagName("line").item(i).getTextContent();
                 layout.AddKeyboardLine(new KeyboardLine (line));
             }

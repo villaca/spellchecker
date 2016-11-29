@@ -41,15 +41,20 @@ public class DictionaryReader {
             StringBuilder word = new StringBuilder();
             char letterRead;
 
+            //while exists entry in the archive
             while (zipIn.available() > 0)
             {
                 letterRead = (char) zipIn.read();
 
-                if(!(Character.isLetter(letterRead)) && (Character.valueOf(letterRead) != Character.valueOf(HYFEN))){
+                
+                //if its a word, add to bktree
+                if(!(Character.isLetter(letterRead)) && (Character.valueOf(letterRead) != Character.valueOf(HYFEN)))
+                {
                     bkTree.add(word.toString());
                     word.setLength(0);
                 }
-                else {
+                else 
+                {
                     word.append(Character.toUpperCase(letterRead));
                 }
             }

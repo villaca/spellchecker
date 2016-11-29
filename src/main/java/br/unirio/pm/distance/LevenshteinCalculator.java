@@ -25,9 +25,10 @@ public class LevenshteinCalculator implements IDistanceCalculator {
      */
     @Override
     public double calculatesDistance(String word1, String word2) {
-        if (word1.length() == 0 && word2.length() == 0) {
+        if (word1.length() == 0 && word2.length() == 0) 
+        {
 			return -1;
-		}
+	}
         if (word1.length() == 0) 
         	return word2.length();
         if (word2.length() == 0) 
@@ -51,10 +52,12 @@ public class LevenshteinCalculator implements IDistanceCalculator {
             	// if the letters of lines and columms are different we add 1 in cost
             	double cost;
             	
-            	if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+            	if (word1.charAt(i - 1) == word2.charAt(j - 1)) 
+                {
             		cost = 0;
             	}
-            	else {
+            	else 
+                {
             		cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
             	}
 

@@ -26,12 +26,16 @@ public class KeyboardLayout {
      * nao entendi esse
      */
     public void prepareDistances() {
-        for(KeyboardLine line : this.lines){
-            for(int i = 0; i < line.getLineLength(); i++){
+        for(KeyboardLine line : this.lines)
+        {
+            for(int i = 0; i < line.getLineLength(); i++)
+            {
                 HashMap<Character,Double> distancesFromChar = new HashMap<Character,Double>();
 
-                for(KeyboardLine lineCompared : this.lines) {
-                    for (int j = 0; j < lineCompared.getLineLength(); j++) {
+                for(KeyboardLine lineCompared : this.lines) 
+                {
+                    for (int j = 0; j < lineCompared.getLineLength(); j++) 
+                    {
                         distancesFromChar.put(lineCompared.getChar(j),
                                 this.calculateDistance(line.getChar(i), lineCompared.getChar(j)));
                     }
@@ -57,7 +61,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height1++;
             offset1 += line.getOffset();
-            if(line.hasChar(key1)){
+            if(line.hasChar(key1))
+            {
                 position1 = line.charPosition(key1);
                 break;
             }
@@ -69,16 +74,19 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height2++;
             offset2 += line.getOffset();
-            if(line.hasChar(key2)){
+            if(line.hasChar(key2))
+            {
                 position2 = line.charPosition(key2);
                 break;
             }
         }
 
-        if(height1 == height2){
+        if(height1 == height2)
+        {
             return Math.abs(position1 - position2);
         }
-        else {
+        else 
+        {
             double width = (position1 + offset1) - (position2 + offset2);
             double height = height1 - height2;
             return Math.sqrt(width * width + height * height);
@@ -134,15 +142,18 @@ public class KeyboardLayout {
         double offsetTemp = this.lines.get(0).getOffset();
         char firstKey = this.lines.get(0).getChar(0);
 
-        for(KeyboardLine line : this.lines){
-            if(line.getOffset() < offsetTemp){
+        for(KeyboardLine line : this.lines)
+        {
+            if(line.getOffset() < offsetTemp)
+            {
                 firstKey = line.getChar(0);
             }
         }
 
         for(KeyboardLine line : this.lines){
             distanceFromOrigin = getNominalDistance(firstKey, line.getChar(line.getLineLength() - 1));
-            if(distanceFromOrigin > maximumDistance){
+            if(distanceFromOrigin > maximumDistance)
+            {
                 maximumDistance = distanceFromOrigin;
             }
         }
@@ -158,7 +169,8 @@ public class KeyboardLayout {
      * @return the relative distance between 2 keys
      */
     public double getRelativeDistance(char key1, char key2){
-        if((key1 == '-') || (key2 == '-')){
+        if((key1 == '-') || (key2 == '-'))
+        {
             return 1;
         }
         return this.getNominalDistance(key1, key2) / this.getMaximumDistance();

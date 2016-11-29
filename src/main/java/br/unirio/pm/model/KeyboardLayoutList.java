@@ -17,10 +17,13 @@ public class KeyboardLayoutList extends ArrayList <KeyboardLayout>  {
      * @param keyboardType  model of the used keyboard
      */
     public KeyboardLayout getLayoutByName(String keyboardType) {
-        for(KeyboardLayout layout : this){
-            if (layout.getModel().equals(keyboardType.toUpperCase())){
+        for(KeyboardLayout layout : this)
+        {
+            if (layout.getModel().equals(keyboardType.toUpperCase()))
+            {
                 return layout;
             }
+                
         }
         return null;
     }

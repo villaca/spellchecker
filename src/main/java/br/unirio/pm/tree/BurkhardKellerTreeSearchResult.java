@@ -38,10 +38,12 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
     }
 
     public int getPosition(String word) throws Exception {
-        if(!(this.getMatches().contains(this.wordDefault(word)))){
+        if(!(this.getMatches().contains(this.wordDefault(word))))
+        {
             throw new Exception("Word not found!");
         }
-        else{
+        else
+        {
             return this.getMatches().indexOf(word);
         }
     }

@@ -14,9 +14,9 @@ public class KeyboardLine {
 
     public KeyboardLine(String lineValue){
         this.line = new ArrayList<Character>();
-        for(int i = 0; i < lineValue.length(); i++){
+        for(int i = 0; i < lineValue.length(); i++)
             line.add(lineValue.charAt(i));
-        }
+        
         this.offset = 0;
     }
 
@@ -28,7 +28,8 @@ public class KeyboardLine {
      */
     public KeyboardLine(String lineValue, float offset){
         this.line = new ArrayList<Character>();
-        for(int i=0; i<lineValue.length();i++){
+        for(int i=0; i<lineValue.length();i++)
+        {
             line.add(lineValue.charAt(i));
         }
         this.offset = offset;
@@ -36,7 +37,9 @@ public class KeyboardLine {
 
     public void printCharacters(){
         for(Character c : line)
+        {
             System.out.print(c);
+        }
     }
 
     public float getOffset() {

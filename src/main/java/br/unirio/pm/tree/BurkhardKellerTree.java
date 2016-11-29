@@ -50,21 +50,30 @@ public class BurkhardKellerTree {
 
         int distanceFromRoot = 0;
         boolean distanceMatched;
-        while(distanceFromRoot <= maxDistanceAllowed){
+        
+        while(distanceFromRoot <= maxDistanceAllowed)
+        {
             distanceMatched = false;
-            while (it.hasNext()) {
+            
+            while (it.hasNext()) 
+            {
                 String match = it.next();
                 int matchedDistance = this.truncateDistance(this.getCalculator()
                                                 .calculatesDistance(match,this.wordDefault(word)));
-                if(matchedDistance == distanceFromRoot ){
+                
+                if(matchedDistance == distanceFromRoot )
+                {
                     bkTree.add(match);
                     distanceMatched = true;
                     it.remove();
                 }
             }
-            if(!distanceMatched){
+            
+            if(!distanceMatched)
+            {
                 distanceFromRoot++;
             }
+            
             it = result.iterator();
         }
 
@@ -72,7 +81,7 @@ public class BurkhardKellerTree {
     }
 
     /**
-     * NAO SEI EXPLICAR ESSE METODO
+     * NAO SEI EXPLICAR ESSE METODO ACONSELHO POR COMENTARIO DENTRO
      * 
      * @param word the imput word
      * @param maxDistanceAllowed maximun distance allowed to change the word
@@ -83,14 +92,16 @@ public class BurkhardKellerTree {
         Set<Integer> edges = this.getChildren().keySet();
         int distanceFromRoot = (int) (this.getCalculator().calculatesDistance(this.getRoot(), word));
 
-        if(distanceFromRoot <= maxDistanceAllowed){
+        if(distanceFromRoot <= maxDistanceAllowed)
+        {
             result.add(this.getRoot());
         }
 
         for(int i = (distanceFromRoot - maxDistanceAllowed);
-            i <= (distanceFromRoot + maxDistanceAllowed)  ; i++){
-
-            if(edges.contains(i)){
+            i <= (distanceFromRoot + maxDistanceAllowed)  ; i++)
+        {
+            if(edges.contains(i))
+            {
                 this.getChildren().get(i).wordMatcher(word, maxDistanceAllowed, result);
             }
         }
@@ -105,16 +116,20 @@ public class BurkhardKellerTree {
     public void add(String word){
         String newWord = this.wordDefault(word);
         
-        if(this.getRoot() == null){
+        if(this.getRoot() == null)
+        {
             this.root = newWord;
         }
-        else{
+        else
+        {
             int distance = this.truncateDistance(this.getCalculator().calculatesDistance(this.getRoot(), newWord));
 
-            if(this.getChildren().containsKey(distance)){
+            if(this.getChildren().containsKey(distance))
+            {
                 this.getChildren().get(distance).add(newWord);
             }
-            else {
+            else 
+            {
                 this.getChildren().put(distance, new BurkhardKellerTree(this.getCalculator(), newWord));
             }
         }
