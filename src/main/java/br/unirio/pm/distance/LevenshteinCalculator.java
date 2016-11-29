@@ -29,10 +29,10 @@ public class LevenshteinCalculator implements IDistanceCalculator {
 			return -1;
 	    }
 
-	    if (word1.length() == 0)
-        	return word2.length();
+	if (word1.length() == 0)
+        	return (int) Math.abs(word2.length() * layout.getInsertDeleteDistance());
         if (word2.length() == 0) 
-        	return word1.length();
+        	return (int) Math.abs(word1.length() * layout.getInsertDeleteDistance());
  
         double[][] levensteinMatrix = new double[word1.length() + 1][word2.length() + 1];
 
@@ -57,16 +57,14 @@ public class LevenshteinCalculator implements IDistanceCalculator {
             		cost = 0;
             	}
             	else{
-            		cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
+            		cost = layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
             	}
 
-            	// add to the matriz the lowest neightborhood value
+            	// add to the matrix the lowest neightborhood value
                 levensteinMatrix[i][j] =
-                		Math.min(levensteinMatrix[i - 1][j] + this.layout.getInsertDeleteDistance(),
-                				Math.min(levensteinMatrix[i][j - 1] + this.layout.getInsertDeleteDistance(),
-                				            levensteinMatrix[i - 1][j - 1] + cost
-						        )
-                        );
+                		Math.min(levensteinMatrix[i - 1][j] + layout.getInsertDeleteDistance(),
+                		Math.min(levensteinMatrix[i][j - 1] + layout.getInsertDeleteDistance(),
+                		levensteinMatrix[i - 1][j - 1] + cost));
             }
         }
         
