@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * Classe que representa o tipo do teclado
+ * this class represents to us the keyboard layout
  * 
  * @author Daniel Villaça
  */
 public class KeyboardLayout {
 
     private final static int ALPHABET_SIZE = 26;
-    private String name;
+    private String model;
     private ArrayList <KeyboardLine> lines;
     //private double[][] distanceMatrix;
     private HashMap<Character,HashMap<Character,Double>> distanceMatrix;
@@ -22,6 +22,9 @@ public class KeyboardLayout {
         this.distanceMatrix = new HashMap<Character,HashMap<Character,Double>>();
     }
 
+    /**
+     * nao entendi esse
+     */
     public void prepareDistances() {
         for(KeyboardLine line : this.lines){
             for(int i = 0; i < line.getLineLength(); i++){
@@ -39,10 +42,14 @@ public class KeyboardLayout {
     }
 
     /**
-     * @param q1  ? acho uma boa mudar o nome dessas variaveis
-     * @param q
+     * calculates te distance between 2 keys
+     * 
+     * @param key2  key to be compared
+     * @param key1 key to be compared and get the distance between
+     * 
+     * @return the distance between 2 keys
      */
-    private double calculateDistance(char q, char q1) {
+    private double calculateDistance(char key1, char key2) {
 
         int height1 = 0;
         float offset1 = 0;
@@ -50,8 +57,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height1++;
             offset1 += line.getOffset();
-            if(line.hasChar(q)){
-                position1 = line.charPosition(q);
+            if(line.hasChar(key1)){
+                position1 = line.charPosition(key1);
                 break;
             }
         }
@@ -62,8 +69,8 @@ public class KeyboardLayout {
         for (KeyboardLine line : this.lines){
             height2++;
             offset2 += line.getOffset();
-            if(line.hasChar(q1)){
-                position2 = line.charPosition(q1);
+            if(line.hasChar(key2)){
+                position2 = line.charPosition(key2);
                 break;
             }
         }
@@ -78,23 +85,32 @@ public class KeyboardLayout {
         }
     }
 
+    /**
+     * 
+     * @param key2  key to be compared
+     * @param key1 key to be compared and get the distance between
+     * 
+     * @return the nominal distance
+     */
     public double getNominalDistance(char key1, char key2){
         return this.distanceMatrix.get(Character.toUpperCase(key1)).get(Character.toUpperCase(key2));
     }
     
     /**
-     * @param name  nome do model do teclado
+     * @param model  Keyboard Layout model
      */
-    public void setName(String name){
-        this.name = name;
+    public void setModel(String model){
+        this.model = model;
     }
     
-    public String getName(){
-        return name;
+    public String getModel(){
+        return model;
     }
     
     /**
-     * @param line  linha do teclado
+     * defines the keyboard lines
+     * 
+     * @param line  Keyboard line
      */
     public void AddKeyboardLine(KeyboardLine line){
         this.lines.add(line);
@@ -108,6 +124,10 @@ public class KeyboardLayout {
         return 0.25;
     }
 
+    /**
+     * 
+     * @return the maximun distance of one key to another
+     */
     public double getMaximumDistance(){
         double maximumDistance = 0;
         double distanceFromOrigin = 0;
@@ -130,6 +150,13 @@ public class KeyboardLayout {
         return maximumDistance;
     }
 
+    /**
+     * calculates the relative distance between 2 keys using (nominal distance / maximun distance) 
+     * 
+     * @param key1 key of the keyboard
+     * @param key2 key of the keyboard
+     * @return the relative distance between 2 keys
+     */
     public double getRelativeDistance(char key1, char key2){
         if((key1 == '-') || (key2 == '-')){
             return 1;

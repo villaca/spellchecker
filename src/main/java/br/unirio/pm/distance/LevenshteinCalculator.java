@@ -3,7 +3,7 @@ package br.unirio.pm.distance;
 import br.unirio.pm.model.KeyboardLayout;
 
 /**
- * this class calculates de distance using Levenshtein algothim
+ * this class calculatesDistance de distance using Levenshtein algothim
  * 
  * @autor Daniel Villaça
  */
@@ -18,12 +18,13 @@ public class LevenshteinCalculator implements IDistanceCalculator {
     
     /**
      * 
-     * @param word1 ?
-     * @param word2 ?
+     * @param word1 palavra original(?)
+     * @param word2 palavra a ser comparada(?)
+     * 
      * @return the Levenshtein distance
      */
     @Override
-    public double calcula(String word1, String word2) {
+    public double calculatesDistance(String word1, String word2) {
         if (word1.length() == 0 && word2.length() == 0) {
 			return -1;
 		}

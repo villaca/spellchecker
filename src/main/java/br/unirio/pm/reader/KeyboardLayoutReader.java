@@ -12,15 +12,19 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * this class read the Keyboard layout
+ * this class reads the possibles Keyboard layout
  * 
  * @autor Daniel Villaça
  */
 public class KeyboardLayoutReader {
    
     /**
+     * reads the XML content and stores the keyboard layouts in a list
+     * 
      * @param sourceFile  file path
      * @return the list off layout characters
+     * 
+     * @return the list of possibles keyboard layouts
      */
     public KeyboardLayoutList loadFromFile(String sourceFile) {
         KeyboardLayoutList layoutList = new KeyboardLayoutList();
@@ -49,15 +53,19 @@ public class KeyboardLayoutReader {
     }
 
     /**
-     * @param nNode  ?
+     * NAO ENTENDI OQUE ESSE METODO FAZ
+     * 
+     * @param nNode  NAO SEI QUE PARAMETRO E ESSE
      * @return the layout of the keyboard
+     * 
+     * @return the keyboard layout used
      */
     private KeyboardLayout readNode(Node nNode){
 
         KeyboardLayout layout = new KeyboardLayout();
         Element eElement = (Element) nNode;
 
-        layout.setName(eElement.getAttribute("model"));
+        layout.setModel(eElement.getAttribute("model"));
         for(int i = 0; i < eElement.getElementsByTagName("line").getLength(); i++){
             if(eElement.getElementsByTagName("line").item(i).hasAttributes()){
                 String offset = eElement.getElementsByTagName("line")

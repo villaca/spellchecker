@@ -7,7 +7,7 @@ import java.util.Map;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
- * this class calculates de distance using Demerau Levenshtein algothim
+ * this class calculates de calculatesDistance using Demerau Levenshtein algothim
  * 
  * @autor Daniel Villaça
  */
@@ -24,10 +24,11 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
      * 
      * @param word1 palavra original(?)
      * @param word2 palavra a ser comparada(?)
-     * @return the Demerau Levenshtein distance
+     * 
+     * @return the Demerau Levenshtein calculatesDistance
      */
     @Immutable
-    public double distance(String word1, String word2) {
+    public double calculatesDistance(String word1, String word2) {
         
         int largestDistance = word1.length() + word2.length();
 
@@ -47,7 +48,7 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
             }
         }
 
-        // Create the distance matrix H[0 .. s1.length+1][0 .. s2.length+1]
+        // Create the calculatesDistance matrix H[0 .. s1.length+1][0 .. s2.length+1]
         double[][] h = new double[word1.length() + 2][word2.length() + 2];
 
         // initialize the left and top edges of H
@@ -62,7 +63,7 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
 
         }
 
-        // fill in the distance matrix H
+        // fill in the calculatesDistance matrix H
         // look at each character in word1
         for (int i = 1; i <= word1.length(); i++) {
             int db = 0;
@@ -94,11 +95,5 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
         }
 
         return h[word1.length() + 1][word2.length() + 1];
-    }
-
-    //na real é o método acima com o nome alterado, deixei assim pq não vou encostar nisso agora
-    @Override
-    public double calcula(String word1, String word2) {
-        return distance(word1,word2);
     }
 }

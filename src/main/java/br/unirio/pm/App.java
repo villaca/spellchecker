@@ -43,7 +43,7 @@ public class App
 
         //IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
 
-        System.out.println(measurerL.calcula("teste", "xablau"));
+        System.out.println(measurerL.calculatesDistance("teste", "xablau"));
         //System.out.println(measurerD.distance("teste", "xablau"));
 
     }

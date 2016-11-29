@@ -6,7 +6,7 @@ import java.util.*;
 
 
 /**
- * this class represents the BK tree
+ * this class represents the BK tree, which is used to implements spellchecker
  * 
  * @author Daniel Villaça
  */
@@ -30,10 +30,13 @@ public class BurkhardKellerTree {
 
 
     /**
+     * NAO SEI COMO EXPLICAR ESSE METODO, INDICO POR COMENTARIOS DENTRO DO METODO
+     * 
      * @param word the word to be searched in the bktree
      * @param maxDistanceAllowed the maximum distance allowed for the root node in relation to the word searched for
      * @param maxNodesAllowed the maximum number of nodes contained in the bktree returned by the search
      *
+     * @return the final bktree
      */
     public BurkhardKellerTreeSearchResult search(String word, int maxDistanceAllowed, int maxNodesAllowed) {
 
@@ -52,7 +55,7 @@ public class BurkhardKellerTree {
             while (it.hasNext()) {
                 String match = it.next();
                 int matchedDistance = this.truncateDistance(this.getCalculator()
-                                                .calcula(match,this.wordDefault(word)));
+                                                .calculatesDistance(match,this.wordDefault(word)));
                 if(matchedDistance == distanceFromRoot ){
                     bkTree.add(match);
                     distanceMatched = true;
@@ -68,10 +71,17 @@ public class BurkhardKellerTree {
         return bkTree;
     }
 
+    /**
+     * NAO SEI EXPLICAR ESSE METODO
+     * 
+     * @param word the imput word
+     * @param maxDistanceAllowed maximun distance allowed to change the word
+     * @param result NAO SEI
+     */
     private void wordMatcher(String word, int maxDistanceAllowed, ArrayList<String> result) {
 
         Set<Integer> edges = this.getChildren().keySet();
-        int distanceFromRoot = (int) (this.getCalculator().calcula(this.getRoot(), word));
+        int distanceFromRoot = (int) (this.getCalculator().calculatesDistance(this.getRoot(), word));
 
         if(distanceFromRoot <= maxDistanceAllowed){
             result.add(this.getRoot());
@@ -87,6 +97,11 @@ public class BurkhardKellerTree {
 
     }
 
+    /**
+     * add a word into the bktree
+     * 
+     * @param word word to be added in the bktree
+     */
     public void add(String word){
         String newWord = this.wordDefault(word);
         
@@ -94,7 +109,7 @@ public class BurkhardKellerTree {
             this.root = newWord;
         }
         else{
-            int distance = this.truncateDistance(this.getCalculator().calcula(this.getRoot(), newWord));
+            int distance = this.truncateDistance(this.getCalculator().calculatesDistance(this.getRoot(), newWord));
 
             if(this.getChildren().containsKey(distance)){
                 this.getChildren().get(distance).add(newWord);
@@ -122,6 +137,13 @@ public class BurkhardKellerTree {
         return children;
     }
 
+    /**
+     * this method is used to padronizate the words
+     * 
+     * @param word to be padronizated
+     * 
+     * @return padronizated word
+     */
     protected String wordDefault(String word){
         String newWord = word.toUpperCase();
         newWord = newWord.trim();

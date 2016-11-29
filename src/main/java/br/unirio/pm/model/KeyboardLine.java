@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.unirio.pm.model;
 
 import java.util.ArrayList;
 
 /**
- * this class represents the keyboard lines
+ * this class represents the keyboard lines of a specific keyboard
  * 
  * @author Gabriel Teixeira
  */
@@ -26,6 +21,8 @@ public class KeyboardLine {
     }
 
     /**
+     * NAO SEI COMO EXPLICAR ESSE METODO
+     * 
      * @param lineValue  keyboard line
      * @param offset offset keyboard line
      */

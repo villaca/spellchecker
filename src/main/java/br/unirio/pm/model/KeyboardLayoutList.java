@@ -18,7 +18,7 @@ public class KeyboardLayoutList extends ArrayList <KeyboardLayout>  {
      */
     public KeyboardLayout getLayoutByName(String keyboardType) {
         for(KeyboardLayout layout : this){
-            if (layout.getName().equals(keyboardType.toUpperCase())){
+            if (layout.getModel().equals(keyboardType.toUpperCase())){
                 return layout;
             }
         }

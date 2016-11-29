@@ -15,11 +15,16 @@ import java.util.zip.ZipInputStream;
  */
 public class DictionaryReader {
 
+    // we will use this char to define the words which contains "-"
     public static final char HYFEN = '-';
 
     /**
+     * open the dictionary file and put in a BK tree
+     * 
      * @param sourceFile  archive path
      * @param calculator the value calculated to the distance between 2 keyboard keys
+     * 
+     * @return the BK tree with the words required
      */
     
     public BurkhardKellerTree loadFromFile(String sourceFile, IDistanceCalculator calculator) {

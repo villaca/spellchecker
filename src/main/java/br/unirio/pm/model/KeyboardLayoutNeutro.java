@@ -1,6 +1,8 @@
 package br.unirio.pm.model;
 
 /**
+ * This class is used to calculate the distances without regarding the keyboard layout
+ * 
  * @author Daniel Villaça
  */
 public class KeyboardLayoutNeutro extends KeyboardLayout {

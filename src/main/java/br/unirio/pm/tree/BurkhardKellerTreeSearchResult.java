@@ -34,7 +34,7 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
     }
 
     public double getDistance(int position) {
-        return this.getCalculator().calcula(this.getWord(0),this.getWord(position));
+        return this.getCalculator().calculatesDistance(this.getWord(0),this.getWord(position));
     }
 
     public int getPosition(String word) throws Exception {
