@@ -33,7 +33,7 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         	return word1.length();
  
         int[][] levensteinMatrix = new int[word1.length() + 1][word2.length() + 1];
-        
+
         // fills the first line and columm
         for (int i = 0; i <= word1.length(); i++)
             levensteinMatrix[i][0] = i;
@@ -67,6 +67,6 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         }
         
         //the last element is the minimal distance
-        return levensteinMatrix[word1.length()][word1.length()];
+        return levensteinMatrix[word1.length()][word2.length()];
     }
 }

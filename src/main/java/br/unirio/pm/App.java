@@ -37,13 +37,15 @@ public class App
             System.out.println();
         }*/
 
+
+
         IDistanceCalculator measurerL = new LevenshteinCalculator(layout);
-        IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
 
-        System.out.println(measurerL.distance("teste", "xablau"));
-        System.out.println(measurerD.distance("teste", "xablau"));
+        //IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
 
-        
+        System.out.println(measurerL.calcula("teste", "xablau"));
+        //System.out.println(measurerD.distance("teste", "xablau"));
+
     }
 }
 

@@ -1,10 +1,13 @@
 package br.unirio.pm.model;
 
 /**
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class KeyboardLayoutNeutro extends KeyboardLayout {
-    public int KeyboardLayoutNeutro(){
+
+    @Override
+    public double getNominalDistance(char key1, char key2){
         return 1;
     }
+
 }

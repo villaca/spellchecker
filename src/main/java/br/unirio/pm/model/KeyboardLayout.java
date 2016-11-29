@@ -7,8 +7,7 @@ import java.util.Set;
 /**
  * Classe que representa o tipo do teclado
  * 
- * @autor Daniel Villaça 
- * @version 18/11/2016.
+ * @author Daniel Villaça
  */
 public class KeyboardLayout {
 
@@ -106,8 +105,7 @@ public class KeyboardLayout {
     }
 
     public double getInsertDeleteDistance() {
-
-        return 0;
+        return 0.25;
     }
 
     public double getMaximumDistance(){

@@ -96,6 +96,6 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
     //na real é o método acima com o nome alterado, deixei assim pq não vou encostar nisso agora
     @Override
     public double calcula(String word1, String word2) {
-        return 0;
+        return distance(word1,word2);
     }
 }

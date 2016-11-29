@@ -1,14 +1,14 @@
 package br.unirio.pm.tree;
 
 import br.unirio.pm.distance.IDistanceCalculator;
-import java.util.HashMap;
-import java.util.Set;
+
+import java.util.*;
 
 
 /**
  * this class represents the BK tree
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class BurkhardKellerTree {
 
@@ -39,77 +39,75 @@ public class BurkhardKellerTree {
 
         BurkhardKellerTreeSearchResult bkTree = new BurkhardKellerTreeSearchResult(this.calculator);
 
-        int nodesReturnedCount = 0;
-        if(root.equals(word)){
+        ArrayList<String> result = new ArrayList<String>();
+        this.wordMatcher(this.wordDefault(word), maxDistanceAllowed, result);
 
-            bkTree.copy(this);
-            bkTree.children.keySet() ;
+        Iterator<String> it = result.iterator();
 
 
-            bkTree.add(word);
-            nodesReturnedCount++;
-
-            for(int i = 0; i < maxDistanceAllowed; i++){
-                bkTree.add(this.children.get(i).getRoot());
-                nodesReturnedCount++;
-                if (nodesReturnedCount >= maxNodesAllowed){
-                    break;
+        int distanceFromRoot = 0;
+        boolean distanceMatched;
+        while(distanceFromRoot <= maxDistanceAllowed){
+            distanceMatched = false;
+            while (it.hasNext()) {
+                String match = it.next();
+                int matchedDistance = this.truncateDistance(this.getCalculator()
+                                                .calcula(match,this.wordDefault(word)));
+                if(matchedDistance == distanceFromRoot ){
+                    bkTree.add(match);
+                    distanceMatched = true;
+                    it.remove();
                 }
-
-                Set<Integer> chaves = bkTree.getChildren().keySet();
-                for(int chave : chaves){
-                    int depth = 0;
-                    BurkhardKellerTree childTree = this.children.get(chave);
-
-
-                        bkTree.add(children.get(i).getRoot());
-                    }
-
-                    bkTree.add(children.get(i).getRoot());
-                    nodesReturnedCount++;
-                    if (nodesReturnedCount >= maxNodesAllowed){
-                        break;
-                    }
-                }
-
             }
-        
-        
-
-        for (BkTreeSearcher.Match<? extends String> match : matches) {
-            bkTree.add(match.getMatch());
-
-            //NÃO REMOVER O TRECHO COMENTADO ABAIXO,
-            //TODO: ARRUMAR UMA MANEIRA ADEQUADA DE FAZER ISSO, PROVAVELMENTE POVOANDO TUDO E RETIRANDO O Q EXCEDER
-            /*nodesReturnedCount++;
-            if (nodesReturnedCount >= maxNodesAllowed){
-                break;
-            }*/
+            if(!distanceMatched){
+                distanceFromRoot++;
+            }
+            it = result.iterator();
         }
+
         return bkTree;
     }
 
+    private void wordMatcher(String word, int maxDistanceAllowed, ArrayList<String> result) {
+
+        Set<Integer> edges = this.getChildren().keySet();
+        int distanceFromRoot = (int) (this.getCalculator().calcula(this.getRoot(), word));
+
+        if(distanceFromRoot <= maxDistanceAllowed){
+            result.add(this.getRoot());
+        }
+
+        for(int i = (distanceFromRoot - maxDistanceAllowed);
+            i <= (distanceFromRoot + maxDistanceAllowed)  ; i++){
+
+            if(edges.contains(i)){
+                this.getChildren().get(i).wordMatcher(word, maxDistanceAllowed, result);
+            }
+        }
+
+    }
+
     public void add(String word){
-        String newWord = wordDefault(word); 
+        String newWord = this.wordDefault(word);
         
-        if(root == null){
-            root = newWord; 
+        if(this.getRoot() == null){
+            this.root = newWord;
         }
         else{
-            int distance = this.truncateDistance(this.calculator.calcula(this.root, newWord));
+            int distance = this.truncateDistance(this.getCalculator().calcula(this.getRoot(), newWord));
 
-            if(children.containsKey(distance)){
-                children.get(distance).add(newWord);
+            if(this.getChildren().containsKey(distance)){
+                this.getChildren().get(distance).add(newWord);
             }
             else {
-                children.put(distance, new BurkhardKellerTree(this.calculator, newWord));
+                this.getChildren().put(distance, new BurkhardKellerTree(this.getCalculator(), newWord));
             }
         }
         
     }
 
     protected int truncateDistance(double distance){
-        return (int) Math.round(distance * 100);
+        return (int) Math.round(distance * 100)/100;
     }
 
     public String getRoot() {
@@ -124,25 +122,7 @@ public class BurkhardKellerTree {
         return children;
     }
 
-    public void copy(BurkhardKellerTree bkTree){
-        this.root = bkTree.getRoot();
-        this.children = (HashMap<Integer, BurkhardKellerTree>) bkTree.getChildren().clone();
-        this.calculator = bkTree.getCalculator();
-    }
-
-    public void removeFurtherThan(int maximumDistance){
-
-        Set<Integer> keys = this.children.keySet();
-
-        for(int i = 0; i < keys.size(); i++){
-            this.children.get(i).removeFurtherThan(maximumDistance);
-        }
-
-
-
-    }
-    
-    public String wordDefault(String word){
+    protected String wordDefault(String word){
         String newWord = word.toUpperCase();
         newWord = newWord.trim();
         newWord = newWord.replace(".", "");
