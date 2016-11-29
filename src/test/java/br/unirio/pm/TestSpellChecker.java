@@ -18,7 +18,7 @@ import br.unirio.pm.tree.BurkhardKellerTreeSearchResult;
 
 /**
  * Casos de teste do verificador ortográfico
- * 
+ *
  * @author marciobarros
  */
 public class TestSpellChecker
@@ -214,7 +214,12 @@ public class TestSpellChecker
 		IDistanceCalculator calculator = new LevenshteinCalculator(layout);
 		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
-		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 10);
+		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 20);
+
+		/*for(String match : result.getMatches()){
+			System.out.println(match);
+		}*/
+
 		check(result, 0, "casa", 0.0);
 		check(result, 1, "cana", 0.11);
 		check(result, 2, "caso", 0.11);

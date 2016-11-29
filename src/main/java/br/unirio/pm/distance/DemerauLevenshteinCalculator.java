@@ -81,9 +81,8 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
                 int i1 = position.get(word2.charAt(j - 1));
                 int j1 = db;
 
-//TODO: este demerau nao funciona bem com palavras de uma letra, precisa ajustar os indíces para poder usar a distância
-                //double cost = this.layout.getRelativeDistance(word1.charAt(i),word2.charAt(j));
-                double cost = 1;
+                double cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
+                //double cost = 1;
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) 
                 {
                     cost = 0;
@@ -93,12 +92,13 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
                 matrixCalculateDemerau[i + 1][j + 1] = Math.min(matrixCalculateDemerau[i][j] + cost, // substitution
                                                        Math.min(matrixCalculateDemerau[i + 1][j] + this.layout.getInsertDeleteDistance(), // insertion
                                                        Math.min(matrixCalculateDemerau[i][j + 1] + this.layout.getInsertDeleteDistance(), // deletion
-                                                       matrixCalculateDemerau[i1][j1] + (i - i1 - 1) + 1 + (j - j1 - 1))));
-
-//TODO: testar transposição com matrixCalculateDemerau[i1][j1] + this.layout.getNominalDistance(word1.charAt(i), word2.charAt(j1));
-                
+                                                                matrixCalculateDemerau[i1][j1]                  //transposition
+                                                                        + ((i - i1 - 1) * this.layout.getInsertDeleteDistance())
+                                                                        + ((j - j1 - 1) * this.layout.getInsertDeleteDistance())
+                                                                        + this.layout.getRelativeDistance(word1.charAt(i-1), word2.charAt(j1))
+                                                                )
+                                                       ));
             }
-
             position.put(word1.charAt(i - 1), i);
         }
 

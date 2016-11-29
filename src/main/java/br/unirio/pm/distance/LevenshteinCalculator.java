@@ -43,8 +43,8 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         for (int i = 0; i <= word2.length(); i++)
             levensteinMatrix[0][i] = i;
 
-        System.out.println("word1: " + word1);
-        System.out.println("word2: " + word2);
+        //System.out.println("word1: " + word1);
+        //System.out.println("word2: " + word2);
 
         
         //minimal distance to a word turns in another 

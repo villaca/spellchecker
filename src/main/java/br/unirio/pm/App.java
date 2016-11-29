@@ -52,7 +52,8 @@ public class App
         System.out.println(measurerDNeutro.calculateDistance("teste", "xablau"));
         */
 
-        double distance = measurerL.calculateDistance("casa", "asa");
+        System.out.println(layout.getRelativeDistance('s', 'd'));
+        double distance = measurerD.calculateDistance("casa", "cada");
         System.out.println(distance);
         System.out.println( Math.ceil(distance) );
 

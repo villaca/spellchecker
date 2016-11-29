@@ -169,8 +169,7 @@ public class KeyboardLayout {
      * @return the relative distance between 2 keys
      */
     public double getRelativeDistance(char key1, char key2){
-        if((key1 == '-') || (key2 == '-'))
-        {
+        if((key1 == '-') || (key2 == '-')){
             return 1;
         }
         return this.getNominalDistance(key1, key2) / this.getMaximumDistance();
