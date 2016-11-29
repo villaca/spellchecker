@@ -51,26 +51,22 @@ public class BurkhardKellerTree {
         int distanceFromRoot = 0;
         boolean distanceMatched;
         
-        while(distanceFromRoot <= maxDistanceAllowed)
-        {
+        while(distanceFromRoot <= maxDistanceAllowed){
             distanceMatched = false;
             
-            while (it.hasNext()) 
-            {
+            while (it.hasNext()) {
                 String match = it.next();
                 int matchedDistance = this.truncateDistance(this.getCalculator()
-                                                .calculatesDistance(match,this.wordDefault(word)));
+                                                .calculateDistance(match,this.wordDefault(word)));
                 
-                if(matchedDistance == distanceFromRoot )
-                {
+                if(matchedDistance == distanceFromRoot ){
                     bkTree.add(match);
                     distanceMatched = true;
                     it.remove();
                 }
             }
             
-            if(!distanceMatched)
-            {
+            if(!distanceMatched){
                 distanceFromRoot++;
             }
             
@@ -81,27 +77,26 @@ public class BurkhardKellerTree {
     }
 
     /**
-     * NAO SEI EXPLICAR ESSE METODO ACONSELHO POR COMENTARIO DENTRO
-     * 
      * @param word the imput word
      * @param maxDistanceAllowed maximun distance allowed to change the word
-     * @param result NAO SEI
+     * @param result array used to store the words that matched the criteria
      */
     private void wordMatcher(String word, int maxDistanceAllowed, ArrayList<String> result) {
 
         Set<Integer> edges = this.getChildren().keySet();
-        int distanceFromRoot = (int) (this.getCalculator().calculatesDistance(this.getRoot(), word));
+        int distanceFromRoot = (int) (this.getCalculator().calculateDistance(this.getRoot(), word));
 
-        if(distanceFromRoot <= maxDistanceAllowed)
-        {
+
+        if(distanceFromRoot <= maxDistanceAllowed){
             result.add(this.getRoot());
         }
 
+        /* looks for matches inside the children trees where their distance is
+        *  the distance of the parent +/- the maximum distance allowed
+        */
         for(int i = (distanceFromRoot - maxDistanceAllowed);
-            i <= (distanceFromRoot + maxDistanceAllowed)  ; i++)
-        {
-            if(edges.contains(i))
-            {
+            i <= (distanceFromRoot + maxDistanceAllowed)  ; i++){
+            if(edges.contains(i)){
                 this.getChildren().get(i).wordMatcher(word, maxDistanceAllowed, result);
             }
         }
@@ -122,7 +117,7 @@ public class BurkhardKellerTree {
         }
         else
         {
-            int distance = this.truncateDistance(this.getCalculator().calculatesDistance(this.getRoot(), newWord));
+            int distance = this.truncateDistance(this.getCalculator().calculateDistance(this.getRoot(), newWord));
 
             if(this.getChildren().containsKey(distance))
             {
@@ -136,8 +131,15 @@ public class BurkhardKellerTree {
         
     }
 
+    /**
+     * this method is used to turn double values returned by the calculator into integer
+     *
+     * @param distance to be truncated
+     *
+     * @return truncated distance
+     */
     protected int truncateDistance(double distance){
-        return (int) Math.round(distance * 100)/100;
+        return (int) Math.ceil(distance);
     }
 
     public String getRoot() {
@@ -153,11 +155,11 @@ public class BurkhardKellerTree {
     }
 
     /**
-     * this method is used to padronizate the words
+     * this method is used to standardize the words
      * 
-     * @param word to be padronizated
+     * @param word to be standardized
      * 
-     * @return padronizated word
+     * @return standard word
      */
     protected String wordDefault(String word){
         String newWord = word.toUpperCase();
@@ -166,7 +168,6 @@ public class BurkhardKellerTree {
         newWord = newWord.replace(",", "");
         
         return newWord;
-
     }
 
 }

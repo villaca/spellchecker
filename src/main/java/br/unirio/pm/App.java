@@ -5,8 +5,7 @@ import br.unirio.pm.distance.IDistanceCalculator;
 import br.unirio.pm.distance.LevenshteinCalculator;
 import br.unirio.pm.model.KeyboardLayout;
 import br.unirio.pm.model.KeyboardLayoutList;
-import br.unirio.pm.model.KeyboardLine;
-import br.unirio.pm.reader.DictionaryReader;
+import br.unirio.pm.model.KeyboardLayoutNeutro;
 import br.unirio.pm.reader.KeyboardLayoutReader;
 
 /**
@@ -30,6 +29,8 @@ public class App
         }*/
 
         KeyboardLayout layout = layouts.getLayoutByName("qwerty");
+        layout.prepareDistances();
+        KeyboardLayout layoutNeutro = new KeyboardLayoutNeutro();
         /*System.out.println(layout.getName());
         for (KeyboardLine line : layout.getLines()){
             System.out.println("Offset: " + line.getOffset());
@@ -40,11 +41,20 @@ public class App
 
 
         IDistanceCalculator measurerL = new LevenshteinCalculator(layout);
+        IDistanceCalculator measurerLNeutro = new LevenshteinCalculator(layoutNeutro);
+        IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
+        IDistanceCalculator measurerDNeutro = new DemerauLevenshteinCalculator(layoutNeutro);
 
-        //IDistanceCalculator measurerD = new DemerauLevenshteinCalculator(layout);
+        /*
+        System.out.println(measurerL.calculateDistance("teste", "xablau"));
+        System.out.println(measurerLNeutro.calculateDistance("teste", "xablau"));
+        System.out.println(measurerD.calculateDistance("teste", "xablau"));
+        System.out.println(measurerDNeutro.calculateDistance("teste", "xablau"));
+        */
 
-        System.out.println(measurerL.calculatesDistance("teste", "xablau"));
-        //System.out.println(measurerD.distance("teste", "xablau"));
+        double distance = measurerL.calculateDistance("casa", "asa");
+        System.out.println(distance);
+        System.out.println( Math.ceil(distance) );
 
     }
 }

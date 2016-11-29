@@ -17,4 +17,9 @@ public class KeyboardLayoutNeutro extends KeyboardLayout {
         return 1;
     }
 
+    @Override
+    public double getInsertDeleteDistance() {
+        return 1;
+    }
+
 }

@@ -7,12 +7,10 @@ import br.unirio.pm.model.KeyboardLayout;
 /**
  * This class calculate the I distance
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public interface IDistanceCalculator {
     
-    public KeyboardLayout layout = new KeyboardLayout();
-
-    public abstract double calculatesDistance(String word1, String word2);
+    double calculateDistance(String word1, String word2);
     
 }

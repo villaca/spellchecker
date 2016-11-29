@@ -42,7 +42,13 @@ public class TestSpellChecker
 		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 
 
-		BurkhardKellerTreeSearchResult result1 = tree.search("casa", 1, 10);
+		BurkhardKellerTreeSearchResult result1 = tree.search("casa", 1, 50);
+
+		for(String match : result1.getMatches()){
+			System.out.println(match);
+		}
+
+
 		check(result1, 0, "casa", 0.0);
 		check(result1, 1, "asa", 1.0);
 		check(result1, 2, "cas", 1.0);

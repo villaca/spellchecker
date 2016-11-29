@@ -3,7 +3,7 @@ package br.unirio.pm.distance;
 import br.unirio.pm.model.KeyboardLayout;
 
 /**
- * this class calculatesDistance de distance using Levenshtein algothim
+ * this class calculateDistance de distance using Levenshtein algothim
  * 
  * @autor Daniel Villaça
  */
@@ -24,12 +24,12 @@ public class LevenshteinCalculator implements IDistanceCalculator {
      * @return the Levenshtein distance
      */
     @Override
-    public double calculatesDistance(String word1, String word2) {
-        if (word1.length() == 0 && word2.length() == 0) 
-        {
+    public double calculateDistance(String word1, String word2) {
+        if (word1.length() == 0 && word2.length() == 0){
 			return -1;
-	}
-        if (word1.length() == 0) 
+	    }
+
+	    if (word1.length() == 0)
         	return word2.length();
         if (word2.length() == 0) 
         	return word1.length();
@@ -42,22 +42,21 @@ public class LevenshteinCalculator implements IDistanceCalculator {
  
         for (int i = 0; i <= word2.length(); i++)
             levensteinMatrix[0][i] = i;
- 
+
+        System.out.println("word1: " + word1);
+        System.out.println("word2: " + word2);
+
         
         //minimal distance to a word turns in another 
-        for (int i = 1; i <= word1.length(); i++)
-        {
-            for (int j = 1; j <= word2.length(); j++)
-            {
+        for (int i = 1; i <= word1.length(); i++) {
+            for (int j = 1; j <= word2.length(); j++){
             	// if the letters of lines and columms are different we add 1 in cost
             	double cost;
             	
-            	if (word1.charAt(i - 1) == word2.charAt(j - 1)) 
-                {
+            	if(word1.charAt(i - 1) == word2.charAt(j - 1)){
             		cost = 0;
             	}
-            	else 
-                {
+            	else{
             		cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
             	}
 
@@ -65,8 +64,9 @@ public class LevenshteinCalculator implements IDistanceCalculator {
                 levensteinMatrix[i][j] =
                 		Math.min(levensteinMatrix[i - 1][j] + this.layout.getInsertDeleteDistance(),
                 				Math.min(levensteinMatrix[i][j - 1] + this.layout.getInsertDeleteDistance(),
-                				levensteinMatrix[i - 1][j - 1]
-						)) + cost;
+                				            levensteinMatrix[i - 1][j - 1] + cost
+						        )
+                        );
             }
         }
         

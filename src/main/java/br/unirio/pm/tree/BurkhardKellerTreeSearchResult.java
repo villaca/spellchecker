@@ -3,7 +3,6 @@ package br.unirio.pm.tree;
 import br.unirio.pm.distance.IDistanceCalculator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * this class is used to do the search in the BK Tree
@@ -34,7 +33,7 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
     }
 
     public double getDistance(int position) {
-        return this.getCalculator().calculatesDistance(this.getWord(0),this.getWord(position));
+        return this.getCalculator().calculateDistance(this.getWord(0),this.getWord(position));
     }
 
     public int getPosition(String word) throws Exception {
