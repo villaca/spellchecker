@@ -2,6 +2,7 @@ package br.unirio.pm.distance;
 
 import br.unirio.pm.model.KeyboardLayout;
 
+
 /**
  * this class calculateDistance de distance using Levenshtein algothim
  * 
@@ -62,9 +63,9 @@ public class LevenshteinCalculator implements IDistanceCalculator {
 
             	// add to the matrix the lowest neightborhood value
                 levensteinMatrix[i][j] =
-                		Math.min(levensteinMatrix[i - 1][j] + layout.getInsertDeleteDistance(),
-                		Math.min(levensteinMatrix[i][j - 1] + layout.getInsertDeleteDistance(),
-                		levensteinMatrix[i - 1][j - 1] + cost));
+                		Math.min((levensteinMatrix[i - 1][j] + layout.getInsertDeleteDistance()), 
+                                        (Math.min((levensteinMatrix[i][j - 1] + layout.getInsertDeleteDistance()), 
+                                                (levensteinMatrix[i - 1][j - 1] + cost))));
             }
         }
         
