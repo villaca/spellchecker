@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
  * @author Daniel Villaça adapted from marciobarros
  */
 
-public class TestSpellCheckerWithoutSearch {
+public class TestCalculators {
 
     private static KeyboardLayoutList layouts;
 

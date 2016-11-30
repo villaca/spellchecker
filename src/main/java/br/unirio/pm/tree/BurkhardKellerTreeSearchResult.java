@@ -50,5 +50,19 @@ public class BurkhardKellerTreeSearchResult extends BurkhardKellerTree {
         this.getMatches().add(word);
     }
 
+    public void insertionSort(){
+
+        String temp;
+        for (int i = 1; i < this.getMatches().size(); i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(this.getCalculator().calculateDistance(this.target,this.getMatches().get(j)) < this.getCalculator().calculateDistance(this.target,this.getMatches().get(j-1))){
+                    temp = this.getMatches().get(j);
+                    this.getMatches().add(j, this.getMatches().get(j - 1));
+                    this.getMatches().add(j-1, temp);
+                }
+            }
+        }
+    }
+
 
 }

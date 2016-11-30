@@ -73,6 +73,8 @@ public class BurkhardKellerTree {
             it = result.iterator();
         }
 
+        //bkTree.insertionSort();
+
         return bkTree;
     }
 
@@ -181,6 +183,27 @@ public class BurkhardKellerTree {
         
         return newWord;
     }
+
+    /**
+     * @return string representation of the tree
+     */
+    @Override
+    public String toString(){
+
+        StringBuilder tree = new StringBuilder();
+
+        tree.append("{ " + this.getRoot() + " ");
+
+        for(BurkhardKellerTree child : this.getChildren().values()){
+            tree.append(child.toString());
+        }
+
+        tree.append("}");
+
+        return tree.toString();
+    }
+
+
 
 
 
