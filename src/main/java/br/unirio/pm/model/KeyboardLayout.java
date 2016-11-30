@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * this class represents to us the keyboard layout
  * 
  * @author Daniel Villaça
  */
@@ -14,7 +13,6 @@ public class KeyboardLayout {
     private final static int ALPHABET_SIZE = 26;
     private String model;
     private ArrayList <KeyboardLine> lines;
-    //private double[][] distanceMatrix;
     private HashMap<Character,HashMap<Character,Double>> distanceMatrix;
 
     public KeyboardLayout() {
@@ -23,7 +21,7 @@ public class KeyboardLayout {
     }
 
     /**
-     * nao entendi esse
+     * made a hashmap with the distances between every key
      */
     public void prepareDistances() {
         for(KeyboardLine line : this.lines)
@@ -46,7 +44,7 @@ public class KeyboardLayout {
     }
 
     /**
-     * calculates te distance between 2 keys
+     * calculates the distance between 2 keys
      * 
      * @param key2  key to be compared
      * @param key1 key to be compared and get the distance between
@@ -111,6 +109,10 @@ public class KeyboardLayout {
         this.model = model;
     }
     
+    /**
+     * 
+     * @return the keyboard model 
+     */
     public String getModel(){
         return model;
     }
@@ -124,10 +126,18 @@ public class KeyboardLayout {
         this.lines.add(line);
     }
 
+    /**
+     * 
+     * @return the lines of the keyboard 
+     */
     public ArrayList<KeyboardLine> getLines() {
         return lines;
     }
 
+    /**
+     * 
+     * @return the cost to insert or delete a character 
+     */
     public double getInsertDeleteDistance() {
         return 0.25;
     }

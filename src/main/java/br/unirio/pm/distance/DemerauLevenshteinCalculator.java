@@ -7,7 +7,7 @@ import java.util.Map;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
- * this class calculates de calculateDistance using Demerau Levenshtein algothim
+ * this class calculates the distance using Demerau Levenshtein algothim
  * 
  * @autor Daniel Villaça
  */
@@ -15,15 +15,21 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
     
     private final KeyboardLayout layout;
     
+    /**
+     * Defines the Keyboard Layout to be used
+     * 
+     * @param layout keyboard layout 
+     */
     public DemerauLevenshteinCalculator(KeyboardLayout layout) {
         this.layout = layout;
     }
 
 
     /**
+     * calculate the distance between 2 words using the Demerau Levenshtein theorema
      * 
-     * @param word1 palavra original(?)
-     * @param word2 palavra a ser comparada(?)
+     * @param word1 the first word to be compared (original)
+     * @param word2 the others words to be compared with
      * 
      * @return the Demerau Levenshtein calculateDistance
      */

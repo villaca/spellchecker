@@ -3,7 +3,7 @@ package br.unirio.pm.model;
 import java.util.ArrayList;
 
 /**
- * this class lists the keyboard lines
+ * this class create a ArrayList of the keyboard layout
  * 
  * @autor Daniel Villaça
  */

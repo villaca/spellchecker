@@ -5,7 +5,7 @@ import br.unirio.pm.model.KeyboardLayout;
 
 
 /**
- * This class calculate the I distance
+ * this class is a interface of Levenshtein and Demerau Levenshtein calculator
  * 
  * @author Daniel Villaça
  */

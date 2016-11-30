@@ -40,9 +40,9 @@ public class KeyboardLayoutReader {
 
 	        NodeList nList = doc.getElementsByTagName("layout");
 
-	        for (int temp = 0; temp < nList.getLength(); temp++) 
+	        for (int j = 0; j < nList.getLength(); j++) 
                 {
-		    Node nNode = nList.item(temp);
+		    Node nNode = nList.item(j);
                     layoutList.add(readNode(nNode));
 	        }
         }
@@ -55,9 +55,9 @@ public class KeyboardLayoutReader {
     }
 
     /**
-     * NAO ENTENDI OQUE ESSE METODO FAZ
+     * defines the keyboard model wanted and defines the lines
      * 
-     * @param nNode  NAO SEI QUE PARAMETRO E ESSE
+     * @param nNode  element of the xml file
      * @return the layout of the keyboard
      * 
      * @return the keyboard layout used

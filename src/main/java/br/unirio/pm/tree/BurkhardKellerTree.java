@@ -142,14 +142,26 @@ public class BurkhardKellerTree {
         return (int) Math.ceil(distance);
     }
 
+    /**
+     * 
+     * @return the root of bk tree required
+     */
     public String getRoot() {
         return this.root;
     }
 
+    /**
+     * 
+     * @return return de distance calculator 
+     */
     public IDistanceCalculator getCalculator() {
         return calculator;
     }
 
+    /**
+     * 
+     * @return the children nodes
+     */
     public HashMap<Integer, BurkhardKellerTree> getChildren() {
         return children;
     }
