@@ -45,14 +45,23 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         //the following solution is terrible but we'll go with it for now
         //TODO: debug the code to understand the problem with first letter insertion/deletion
         //TODO: Find a better way to solve the problem than the following solution
-        /*** BEGIN FIRST LETTER BUG BRUTE FORCE FIX ***/
+        /*** BEGIN FIRST LETTER BUG - BRUTE FORCE FIX ***/
+
+        //remove the first letter of the bigger word
         String word1WithoutFirstLetter = word1.substring(1);
         String word2WithoutFirstLetter = word2.substring(1);
 
+        //if the "first letter"-less word is equal to the other just return the insertion/deletion cost
         if((word1.equals(word2WithoutFirstLetter)) || (word2.equals(word1WithoutFirstLetter))){
             return this.layout.getInsertDeleteDistance();
         }
 
+
+        /*
+         *  if the "first letter"-less word suffers other modifications beyond the first letter
+         *  we add the insertion/deletion cost or the cost of trading the first letter
+         *  to the cost of the other transformations
+         */
         if((word1.length() == (word2.length()-1) && (word1.charAt(0) != word2.charAt(0))) ){
             if((word1.length() > 1) && (word2.length() > 1)){
                 if(word1.charAt(1) == word2.charAt(1)){

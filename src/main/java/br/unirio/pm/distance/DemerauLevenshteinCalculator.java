@@ -35,7 +35,6 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
      * 
      * @return the Demerau Levenshtein calculateDistance
      */
-    @Immutable
     public double calculateDistance(String word1, String word2) {
 
         if (word1.length() == 0 && word2.length() == 0){
@@ -53,47 +52,31 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
         //TODO: Find a better way to solve the problem than the following solution
         /*** BEGIN FIRST LETTER BUG BRUTE FORCE FIX ***/
 
+        //remove the first letter of the bigger word
+        String word1WithoutFirstLetter = word1.substring(1);
+        String word2WithoutFirstLetter = word2.substring(1);
 
-
-
-        String word1WithoutFirstLetter ;
-        String word2WithoutFirstLetter;
-        if(word1.length() > 1){
-            word1WithoutFirstLetter = word1.substring(1);
-        }
-        else {
-            word1WithoutFirstLetter = word1;
-        }
-        if(word2.length() > 1){
-            word2WithoutFirstLetter = word2.substring(1);
-        }
-        else {
-            word2WithoutFirstLetter = word2;
-        }
-
-
+        //if the "first letter"-less word is equal to the other just return the insertion/deletion cost
         if((word1.equals(word2WithoutFirstLetter)) || (word2.equals(word1WithoutFirstLetter))){
             return this.layout.getInsertDeleteDistance();
         }
 
+        /*
+         *  if the "first letter"-less word suffers other modifications beyond the first letter
+         *  we add the insertion/deletion cost or the cost of trading the first letter
+         *  to the cost of the other transformations
+         */
         if((word1.length() == (word2.length()-1) && (word1.charAt(0) != word2.charAt(0))) ){
             if((word1.length() > 1) && (word2.length() > 1)){
                 if(word1.charAt(1) == word2.charAt(1)){
-                    if(word2.equals("aveia")){
-                        System.out.println("cheguei onde não devia");
-                    }
                     return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
                             + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
                 }
             }
             return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1, word2WithoutFirstLetter);
         }
-        //System.out.println("word1 : " + word1 + ", word2: " + word2);
         if((word2.length() == (word1.length()-1)) && (word1.charAt(0) != word2.charAt(0))){
             if((word1.length() > 1) && (word2.length() > 1)){
-                if(word2.equals("aveia")){
-                    System.out.println("cheguei onde não devia");
-                }
                 if(word1.charAt(1) == word2.charAt(1)){
                     return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
                             + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
@@ -101,7 +84,7 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
             }
             return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1WithoutFirstLetter, word2);
         }
-        /*** END FIRST LETTER BUG BRUTE FORCE FIX ***/
+        /*** END FIRST LETTER BUG - BRUTE FORCE FIX ***/
 
 
         
