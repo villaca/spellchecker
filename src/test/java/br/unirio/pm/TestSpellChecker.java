@@ -156,7 +156,7 @@ public class TestSpellChecker
 		check(result3, 8, "vida", 0.37);
 		check(result3, 9, "avisar", 0.37);
 	}
-	/*
+
 	@Test
 	public void testDemerauTecladoQwerty()
 	{
@@ -233,7 +233,7 @@ public class TestSpellChecker
 		check(result2, 8, "centena", 0.51);
 		check(result2, 9, "ternura", 0.55);
 	}
-	*/
+
 
 	private void check(BurkhardKellerTreeSearchResult result, int position, String word, double distance)
 	{

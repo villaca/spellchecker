@@ -36,11 +36,43 @@ public class LevenshteinCalculator implements IDistanceCalculator {
 			return -1;
 	    }
 
-	if (word1.length() == 0)
-        	return (int) Math.abs(word2.length() * layout.getInsertDeleteDistance());
+	    if (word1.length() == 0)
+        	return word2.length() * this.layout.getInsertDeleteDistance();
         if (word2.length() == 0) 
-        	return (int) Math.abs(word1.length() * layout.getInsertDeleteDistance());
- 
+        	return word1.length() * this.layout.getInsertDeleteDistance();
+
+
+        //the following solution is terrible but we'll go with it for now
+        //TODO: debug the code to understand the problem with first letter insertion/deletion
+        //TODO: Find a better way to solve the problem than the following solution
+        /*** BEGIN FIRST LETTER BUG BRUTE FORCE FIX ***/
+        String word1WithoutFirstLetter = word1.substring(1);
+        String word2WithoutFirstLetter = word2.substring(1);
+
+        if((word1.equals(word2WithoutFirstLetter)) || (word2.equals(word1WithoutFirstLetter))){
+            return this.layout.getInsertDeleteDistance();
+        }
+
+        if((word1.length() == (word2.length()-1) && (word1.charAt(0) != word2.charAt(0))) ){
+            if((word1.length() > 1) && (word2.length() > 1)){
+                if(word1.charAt(1) == word2.charAt(1)){
+                    return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
+                            + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
+                }
+            }
+            return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1, word2WithoutFirstLetter);
+        }
+        if((word2.length() == (word1.length()-1)) && (word1.charAt(0) != word2.charAt(0))){
+            if((word1.length() > 1) && (word2.length() > 1)){
+                if(word1.charAt(1) == word2.charAt(1)){
+                    return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
+                            + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
+                }
+            }
+            return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1WithoutFirstLetter, word2);
+        }
+        /*** END FIRST LETTER BUG BRUTE FORCE FIX ***/
+
         double[][] levensteinMatrix = new double[word1.length() + 1][word2.length() + 1];
 
         // fills the first line and columm
@@ -50,11 +82,7 @@ public class LevenshteinCalculator implements IDistanceCalculator {
         for (int i = 0; i <= word2.length(); i++)
             levensteinMatrix[0][i] = i;
 
-        //System.out.println("word1: " + word1);
-        //System.out.println("word2: " + word2);
-
-        
-        //minimal distance to a word turns in another 
+        //minimal distance to a word turns in another
         for (int i = 1; i <= word1.length(); i++) {
             for (int j = 1; j <= word2.length(); j++){
             	// if the letters of lines and columms are different we add 1 in cost
@@ -64,14 +92,15 @@ public class LevenshteinCalculator implements IDistanceCalculator {
             		cost = 0;
             	}
             	else{
-            		cost = layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
+            		cost = this.layout.getRelativeDistance(word1.charAt(i - 1),word2.charAt(j - 1));
             	}
 
             	// add to the matrix the lowest neightborhood value
                 levensteinMatrix[i][j] =
-                		Math.min((levensteinMatrix[i - 1][j] + layout.getInsertDeleteDistance()), 
-                                        (Math.min((levensteinMatrix[i][j - 1] + layout.getInsertDeleteDistance()), 
-                                                (levensteinMatrix[i - 1][j - 1] + cost))));
+                		Math.min((levensteinMatrix[i - 1][j] + this.layout.getInsertDeleteDistance()),
+                                        (Math.min((levensteinMatrix[i][j - 1]
+                                                        + this.layout.getInsertDeleteDistance()),
+                                                    (levensteinMatrix[i - 1][j - 1] + cost))));
             }
         }
         

@@ -22,7 +22,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
+        /*KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
 
         Scanner input = new Scanner(System.in);
         String keyboardName = "";
@@ -103,7 +103,16 @@ public class App
         }
 
         return;
+        */
 
+        KeyboardLayoutList layouts = new KeyboardLayoutReader().loadFromFile("data/KeyboardLayouts.xml");
+        KeyboardLayout layout = new KeyboardLayoutNeutro();
+        layout = layouts.getLayoutByName("QWERTY");
+
+
+        IDistanceCalculator calculator = new LevenshteinCalculator(layout);
+
+        System.out.println(calculator.calculateDistance("asa", "casa"));
     }
 }
 

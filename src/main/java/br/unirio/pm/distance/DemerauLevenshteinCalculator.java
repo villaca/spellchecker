@@ -4,6 +4,8 @@ import br.unirio.pm.model.KeyboardLayout;
 import static java.lang.Integer.min;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import jdk.nashorn.internal.ir.annotations.Immutable;
 
 /**
@@ -35,6 +37,73 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
      */
     @Immutable
     public double calculateDistance(String word1, String word2) {
+
+        if (word1.length() == 0 && word2.length() == 0){
+            return -1;
+        }
+
+        if (word1.length() == 0)
+            return word2.length() * this.layout.getInsertDeleteDistance();
+        if (word2.length() == 0)
+            return word1.length() * this.layout.getInsertDeleteDistance();
+
+
+        //the following solution is terrible but we'll go with it for now
+        //TODO: debug the code to understand the problem with first letter insertion/deletion
+        //TODO: Find a better way to solve the problem than the following solution
+        /*** BEGIN FIRST LETTER BUG BRUTE FORCE FIX ***/
+
+
+
+
+        String word1WithoutFirstLetter ;
+        String word2WithoutFirstLetter;
+        if(word1.length() > 1){
+            word1WithoutFirstLetter = word1.substring(1);
+        }
+        else {
+            word1WithoutFirstLetter = word1;
+        }
+        if(word2.length() > 1){
+            word2WithoutFirstLetter = word2.substring(1);
+        }
+        else {
+            word2WithoutFirstLetter = word2;
+        }
+
+
+        if((word1.equals(word2WithoutFirstLetter)) || (word2.equals(word1WithoutFirstLetter))){
+            return this.layout.getInsertDeleteDistance();
+        }
+
+        if((word1.length() == (word2.length()-1) && (word1.charAt(0) != word2.charAt(0))) ){
+            if((word1.length() > 1) && (word2.length() > 1)){
+                if(word1.charAt(1) == word2.charAt(1)){
+                    if(word2.equals("aveia")){
+                        System.out.println("cheguei onde não devia");
+                    }
+                    return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
+                            + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
+                }
+            }
+            return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1, word2WithoutFirstLetter);
+        }
+        //System.out.println("word1 : " + word1 + ", word2: " + word2);
+        if((word2.length() == (word1.length()-1)) && (word1.charAt(0) != word2.charAt(0))){
+            if((word1.length() > 1) && (word2.length() > 1)){
+                if(word2.equals("aveia")){
+                    System.out.println("cheguei onde não devia");
+                }
+                if(word1.charAt(1) == word2.charAt(1)){
+                    return this.layout.getRelativeDistance(word1.charAt(0),word2.charAt(0))
+                            + this.calculateDistance(word1WithoutFirstLetter, word2WithoutFirstLetter);
+                }
+            }
+            return this.layout.getInsertDeleteDistance() + this.calculateDistance(word1WithoutFirstLetter, word2);
+        }
+        /*** END FIRST LETTER BUG BRUTE FORCE FIX ***/
+
+
         
         int largestDistance = word1.length() + word2.length();
 
@@ -107,6 +176,8 @@ public class DemerauLevenshteinCalculator implements IDistanceCalculator {
             }
             position.put(word1.charAt(i - 1), i);
         }
+
+
 
         return matrixCalculateDemerau[word1.length() + 1][word2.length() + 1];
     }
