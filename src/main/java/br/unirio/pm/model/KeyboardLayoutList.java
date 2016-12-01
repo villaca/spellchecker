@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * this class create a ArrayList of the keyboard layout
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class KeyboardLayoutList extends ArrayList <KeyboardLayout>  {
 

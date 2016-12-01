@@ -14,7 +14,7 @@ import org.w3c.dom.NodeList;
 /**
  * this class reads the possibles Keyboard layout
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class KeyboardLayoutReader {
    

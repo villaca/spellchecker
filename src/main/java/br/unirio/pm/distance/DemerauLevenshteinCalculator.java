@@ -11,7 +11,7 @@ import jdk.nashorn.internal.ir.annotations.Immutable;
 /**
  * this class calculates the distance using Demerau Levenshtein algothim
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class DemerauLevenshteinCalculator implements IDistanceCalculator {
     

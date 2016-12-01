@@ -42,7 +42,8 @@ public class TestSpellChecker
 		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 
 
-		BurkhardKellerTreeSearchResult result1 = tree.search("casa", 1, 50);
+		BurkhardKellerTreeSearchResult result1 = tree.search("casa", 1, 10);
+
 		check(result1, 0, "casa", 0.0);
 		check(result1, 1, "asa", 1.0);
 		check(result1, 2, "cas", 1.0);
@@ -121,6 +122,7 @@ public class TestSpellChecker
 		BurkhardKellerTree tree = new DictionaryReader().loadFromFile("data/dictionary_pt-br.zip", calculator);
 		
 		BurkhardKellerTreeSearchResult result = tree.search("casa", 1, 10);
+
 		check(result, 0, "casa", 0.0);
 		check(result, 1, "cada", 0.11);
 		check(result, 2, "caca", 0.20);
@@ -238,6 +240,6 @@ public class TestSpellChecker
 	private void check(BurkhardKellerTreeSearchResult result, int position, String word, double distance)
 	{
 		assertEquals(word, result.getWord(position));
-		assertEquals(distance, result.getDistance(position), 0.001);
+		assertEquals(distance, result.getDistance(position), 0.01);
 	}
 }

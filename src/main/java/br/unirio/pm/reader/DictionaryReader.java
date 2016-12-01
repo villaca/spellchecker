@@ -11,7 +11,7 @@ import java.util.zip.ZipInputStream;
 /**
  * this class defines the dictionary
  * 
- * @autor Daniel Villaça
+ * @author Daniel Villaça
  */
 public class DictionaryReader {
 

@@ -112,7 +112,11 @@ public class App
 
         IDistanceCalculator calculator = new LevenshteinCalculator(layout);
 
-        System.out.println(calculator.calculateDistance("asa", "casa"));
+        //System.out.println(calculator.calculateDistance("asa", "casa"));
+
+        BurkhardKellerTreeSearchResult bktree = new BurkhardKellerTreeSearchResult(calculator, "oi");
+
+        bktree.sort();
     }
 }
 

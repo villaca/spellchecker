@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Gabriel Teixeira
  */
 public class KeyboardLine {
-    float offset;
+    private float offset;
     private ArrayList <Character> line;
     
 

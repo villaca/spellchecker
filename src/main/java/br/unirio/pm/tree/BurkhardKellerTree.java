@@ -73,14 +73,15 @@ public class BurkhardKellerTree {
             it = result.iterator();
         }
 
-        //bkTree.insertionSort();
+        bkTree.sort();
+        bkTree.limitMatches(maxNodesAllowed);
 
         return bkTree;
     }
 
     /**
-     * @param word the imput word
-     * @param maxDistanceAllowed maximun distance allowed to change the word
+     * @param word the input word
+     * @param maxDistanceAllowed maximum distance allowed to change the word
      * @param result array used to store the words that matched the criteria
      */
     private void wordMatcher(String word, int maxDistanceAllowed, ArrayList<String> result) {
